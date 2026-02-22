@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   motion,
   useScroll,
@@ -17,7 +17,7 @@ import { FlowerSVG, ButterflySVG } from "./DecorativeSVGs";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const router = useRouter();
+  const pathname = usePathname();
 
   const { scrollYProgress, scrollY } = useScroll();
   const headerHeight = useTransform(scrollY, [0, 120], [72, 56]);
@@ -44,9 +44,9 @@ const Header = () => {
   ];
 
   const isActive = (path: string) => {
-    if (path === "/") return router.pathname === "/";
-    if (path.startsWith("/#")) return router.asPath === path;
-    return router.pathname === path;
+    if (path === "/") return pathname === "/";
+    if (path.startsWith("/#")) return false; // Hash links are always on home page
+    return pathname === path;
   };
 
   return (
