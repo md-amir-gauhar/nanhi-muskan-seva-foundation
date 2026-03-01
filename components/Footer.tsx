@@ -7,109 +7,88 @@ import {
   Facebook,
   Twitter,
   Instagram,
-  Youtube,
+  Linkedin,
 } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-[#1B2232] text-white relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-[#FA8B46]/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FA8B46]/5 rounded-full blur-3xl" />
+
       {/* Main Footer */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container mx-auto px-4 py-12 md:py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* About Section */}
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full gradient-hero flex items-center justify-center">
-                <Heart
-                  className="w-6 h-6 text-primary-foreground"
-                  fill="currentColor"
-                />
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-[#FA8B46] flex items-center justify-center shadow-lg">
+                <Heart className="w-6 h-6 text-white" fill="currentColor" />
               </div>
               <div>
-                <span className="font-display font-bold text-xl">
-                  Little Hearts
+                <span className="font-display font-bold text-xl text-white">
+                  Nanhi Muskan
                 </span>
-                <span className="block text-xs opacity-70 font-body">
-                  Foundation
+                <span className="block text-xs text-white/60 font-body">
+                  Seva Foundation
                 </span>
               </div>
             </div>
-            <p className="text-background/70 font-body leading-relaxed">
-              Empowering children through education, healthcare, and love. Every
-              child deserves a chance to dream and grow.
+            <p className="text-white/70 font-body leading-relaxed text-sm mb-6">
+              Serving humanity with care. Working to uplift lives and support
+              communities through compassionate, grassroots action.
             </p>
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-3">
               <a
                 href="#"
                 aria-label="Facebook"
-                className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 active:scale-95 transition-all duration-150"
+                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#FA8B46] hover:scale-110 active:scale-95 transition-all duration-200"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
                 href="#"
                 aria-label="Twitter"
-                className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 active:scale-95 transition-all duration-150"
+                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#FA8B46] hover:scale-110 active:scale-95 transition-all duration-200"
               >
                 <Twitter className="w-5 h-5" />
               </a>
               <a
                 href="#"
                 aria-label="Instagram"
-                className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 active:scale-95 transition-all duration-150"
+                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#FA8B46] hover:scale-110 active:scale-95 transition-all duration-200"
               >
                 <Instagram className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                aria-label="YouTube"
-                className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 active:scale-95 transition-all duration-150"
+                aria-label="LinkedIn"
+                className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-[#FA8B46] hover:scale-110 active:scale-95 transition-all duration-200"
               >
-                <Youtube className="w-5 h-5" />
+                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">Quick Links</h4>
-            <ul className="space-y-3 font-body">
+            <h4 className="font-display font-bold text-lg mb-4 text-white">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 font-body">
               <li>
                 <Link
                   href="/about"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
+                  className="text-white/70 hover:text-[#FA8B46] hover:translate-x-1 inline-block transition-all duration-200 text-sm"
                 >
                   About Us
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/#programs"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
-                >
-                  Our Programs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#gallery"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
-                >
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#contact"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
-                >
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/privacy"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
+                  className="text-white/70 hover:text-[#FA8B46] hover:translate-x-1 inline-block transition-all duration-200 text-sm"
                 >
                   Privacy Policy
                 </Link>
@@ -117,7 +96,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="/terms"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
+                  className="text-white/70 hover:text-[#FA8B46] hover:translate-x-1 inline-block transition-all duration-200 text-sm"
                 >
                   Terms & Conditions
                 </Link>
@@ -127,72 +106,74 @@ const Footer = () => {
 
           {/* Programs */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">
+            <h4 className="font-display font-bold text-lg mb-4 text-white">
               Our Programs
             </h4>
-            <ul className="space-y-3 font-body">
+            <ul className="space-y-2.5 font-body">
               <li>
-                <a
-                  href="#"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
+                <Link
+                  href="/#programs"
+                  className="text-white/70 hover:text-[#FA8B46] hover:translate-x-1 inline-block transition-all duration-200 text-sm"
                 >
                   Education Support
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
+                <Link
+                  href="/#programs"
+                  className="text-white/70 hover:text-[#FA8B46] hover:translate-x-1 inline-block transition-all duration-200 text-sm"
                 >
                   Healthcare Camps
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
+                <Link
+                  href="/#programs"
+                  className="text-white/70 hover:text-[#FA8B46] hover:translate-x-1 inline-block transition-all duration-200 text-sm"
                 >
                   Nutrition Program
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
+                <Link
+                  href="/#programs"
+                  className="text-white/70 hover:text-[#FA8B46] hover:translate-x-1 inline-block transition-all duration-200 text-sm"
                 >
                   Sports & Activities
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-background/70 hover:text-primary hover:translate-x-1 inline-block transition-all duration-150"
-                >
-                  Environment Awareness
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h4 className="font-display font-bold text-lg mb-6">Contact Us</h4>
-            <ul className="space-y-4 font-body">
+            <h4 className="font-display font-bold text-lg mb-4 text-white">
+              Contact Us
+            </h4>
+            <ul className="space-y-3 font-body">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary mt-1 flex-shrink-0" />
-                <span className="text-background/70">
+                <MapPin className="w-4 h-4 text-[#FA8B46] mt-0.5 flex-shrink-0" />
+                <span className="text-white/70 text-sm leading-relaxed">
                   123 Hope Street, Sunshine District, Mumbai 400001, India
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-background/70">+91 98765 43210</span>
+                <Phone className="w-4 h-4 text-[#FA8B46] flex-shrink-0" />
+                <a
+                  href="tel:+919876543210"
+                  className="text-white/70 hover:text-[#FA8B46] transition-colors text-sm"
+                >
+                  +91 98765 43210
+                </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <span className="text-background/70">
-                  hello@littlehearts.org
-                </span>
+                <Mail className="w-4 h-4 text-[#FA8B46] flex-shrink-0" />
+                <a
+                  href="mailto:contact@nanhimuskanseva.org"
+                  className="text-white/70 hover:text-[#FA8B46] transition-colors text-sm"
+                >
+                  contact@nanhimuskanseva.org
+                </a>
               </li>
             </ul>
           </div>
@@ -200,16 +181,17 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-background/10">
+      <div className="border-t border-white/10 relative z-10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-background/50 font-body text-sm">
-              © 2024 Little Hearts Foundation. All rights reserved.
+            <p className="text-white/50 font-body text-sm">
+              © {new Date().getFullYear()} Nanhi Muskan Seva Foundation. All
+              rights reserved.
             </p>
-            <p className="text-background/50 font-body text-sm flex items-center gap-1">
+            <p className="text-white/50 font-body text-sm flex items-center gap-1">
               Made with{" "}
-              <Heart className="w-4 h-4 text-primary" fill="currentColor" /> for
-              children everywhere
+              <Heart className="w-4 h-4 text-[#FA8B46]" fill="currentColor" />{" "}
+              for humanity
             </p>
           </div>
         </div>

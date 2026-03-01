@@ -71,16 +71,18 @@ const HeroSection = () => {
 
           {/* Main Heading */}
           <h1 className="font-display font-black text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight drop-shadow-lg">
-            Every Child Deserves a{" "}
-            <span className="text-[#FA8B46] drop-shadow-xl">Brighter</span>{" "}
-            Tomorrow
+            Together, We Create{" "}
+            <span className="text-[#FA8B46] drop-shadow-xl">
+              Hope and Impact
+            </span>
           </h1>
 
           {/* Subtitle */}
           <p className="font-body text-base md:text-lg text-white/90 max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md">
-            Join us in our mission to provide education, healthcare, and hope to
-            underprivileged children. Together, we can create a world where
-            every child thrives.
+            <span className="font-bold">Serving Humanity with Care.</span>
+            <br />
+            We are a community-driven NGO working to uplift lives and support
+            communities through compassionate, grassroots action.
           </p>
 
           {/* CTA Buttons */}

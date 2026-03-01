@@ -17,8 +17,9 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Nanhi Muskan Foundation",
-  description: "Bringing smiles to little faces",
+  title: "Nanhi Muskan Seva Foundation - Serving Humanity with Care",
+  description:
+    "A community-driven NGO working to uplift lives and support communities through compassionate, grassroots action. Small actions. Real change.",
 };
 
 export default function RootLayout({

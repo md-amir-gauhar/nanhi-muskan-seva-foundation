@@ -92,10 +92,10 @@ const Header = () => {
             </motion.div>
             <motion.div style={{ scale: logoScale }}>
               <span className="font-display font-bold text-lg text-foreground leading-tight">
-                Little Hearts
+                Nanhi Muskan
               </span>
               <span className="block text-[10px] text-muted-foreground font-body tracking-wider uppercase">
-                Foundation
+                Seva Foundation
               </span>
             </motion.div>
           </Link>

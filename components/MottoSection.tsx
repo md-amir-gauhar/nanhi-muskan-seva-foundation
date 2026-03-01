@@ -42,9 +42,7 @@ const MottoSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="font-display font-black text-3xl md:text-5xl lg:text-6xl text-foreground mb-8 leading-tight"
           >
-            "A child's smile is worth more than{" "}
-            <span className="text-gradient-hero">all the gold</span> in the
-            world"
+            Small actions. <span className="text-[#FA8B46]">Real change.</span>
           </motion.h2>
 
           <motion.p
@@ -53,9 +51,9 @@ const MottoSection = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="font-body text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
           >
-            We believe every child has the potential to change the world. Our
-            mission is to nurture that potential through love, education, and
-            opportunity.
+            We believe in the power of grassroots action and community-driven
+            change. Together, we can create meaningful impact in the lives of
+            those who need it most.
           </motion.p>
 
           {/* Values */}
@@ -65,22 +63,26 @@ const MottoSection = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="flex flex-wrap justify-center gap-4"
           >
-            {["Love", "Education", "Healthcare", "Equality", "Hope"].map(
-              (value, index) => (
-                <motion.div
-                  key={value}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
-                  className="flex items-center gap-2 bg-card rounded-full px-5 py-3 shadow-card"
-                >
-                  <Heart className="w-4 h-4 text-primary" fill="currentColor" />
-                  <span className="font-display font-bold text-foreground">
-                    {value}
-                  </span>
-                </motion.div>
-              ),
-            )}
+            {[
+              "Community Support",
+              "Education",
+              "Health & Well-being",
+              "Environment Care",
+              "Compassion",
+            ].map((value, index) => (
+              <motion.div
+                key={value}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+                className="flex items-center gap-2 bg-card rounded-full px-5 py-3 shadow-card"
+              >
+                <Heart className="w-4 h-4 text-[#FA8B46]" fill="currentColor" />
+                <span className="font-display font-bold text-foreground">
+                  {value}
+                </span>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </div>
