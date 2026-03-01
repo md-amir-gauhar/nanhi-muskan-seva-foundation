@@ -72,7 +72,7 @@ const Header = () => {
           <Link href="/" className="flex items-center gap-2.5 group">
             <motion.div
               style={{ scale: logoScale }}
-              className="relative w-10 h-10 rounded-xl gradient-hero flex items-center justify-center shadow-soft group-hover:shadow-elevated transition-shadow duration-300"
+              className="relative w-10 h-10 rounded-xl bg-[#FA8B46] flex items-center justify-center shadow-soft group-hover:shadow-elevated transition-shadow duration-300"
             >
               <Heart
                 className="w-5 h-5 text-primary-foreground"
@@ -106,11 +106,11 @@ const Header = () => {
               <Link
                 key={link.name}
                 href={link.path}
-                className="relative px-2 py-2 font-body font-medium text-sm text-muted-foreground hover:text-primary transition-colors duration-300 group"
+                className="relative px-2 py-2 font-body font-medium text-sm text-muted-foreground hover:text-[#FA8B46] transition-colors duration-300 group"
               >
                 {link.name}
                 <motion.span
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#FA8B46] rounded-full"
                   initial={false}
                   animate={{ scaleX: isActive(link.path) ? 1 : 0 }}
                   whileHover={{ scaleX: 1 }}
@@ -128,7 +128,7 @@ const Header = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full font-display font-bold text-sm shadow-md hover:shadow-lg transition-all duration-300">
+                <Button className="bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white px-6 py-2.5 rounded-full font-display font-bold text-sm shadow-md hover:shadow-lg transition-all duration-300">
                   <Heart className="w-3.5 h-3.5 mr-1.5" fill="currentColor" />
                   Donate Now
                 </Button>

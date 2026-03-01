@@ -61,7 +61,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-primary/90 backdrop-blur-sm rounded-full px-5 py-2 mb-8 shadow-lg"
+            className="inline-flex items-center gap-2 bg-[#FA8B46] backdrop-blur-sm rounded-full px-5 py-2 mb-8 shadow-lg"
           >
             <Heart className="w-4 h-4 text-white" fill="currentColor" />
             <span className="text-white font-body text-sm font-semibold">
@@ -72,7 +72,7 @@ const HeroSection = () => {
           {/* Main Heading */}
           <h1 className="font-display font-black text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight drop-shadow-lg">
             Every Child Deserves a{" "}
-            <span className="text-primary drop-shadow-xl">Brighter</span>{" "}
+            <span className="text-[#FA8B46] drop-shadow-xl">Brighter</span>{" "}
             Tomorrow
           </h1>
 
@@ -91,7 +91,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <a href="/donate-us">
-              <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-6 rounded-full font-display font-bold text-base shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95">
+              <Button className="bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white px-8 py-6 rounded-full font-display font-bold text-base shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95">
                 <Heart className="w-5 h-5 mr-2" fill="currentColor" />
                 Donate Now
               </Button>
@@ -119,7 +119,7 @@ const HeroSection = () => {
               { number: "100+", label: "Volunteers" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="font-display font-black text-4xl md:text-5xl text-primary drop-shadow-lg">
+                <div className="font-display font-black text-4xl md:text-5xl text-[#FA8B46] drop-shadow-lg">
                   {stat.number}
                 </div>
                 <div className="font-body text-sm md:text-base text-white/80 mt-2">

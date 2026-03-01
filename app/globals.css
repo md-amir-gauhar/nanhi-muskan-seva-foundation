@@ -12,8 +12,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 30% 15%;
 
-    /* Warm coral/orange - hope, warmth, energy */
-    --primary: 24 95% 58%;
+    /* Primary color - #FA8B46 */
+    --primary: 21 96% 63%;
     --primary-foreground: 0 0% 100%;
 
     /* Sky blue - trust, peace, childhood */
@@ -36,26 +36,26 @@
 
     --border: 40 20% 88%;
     --input: 40 20% 88%;
-    --ring: 24 95% 58%;
+    --ring: 21 96% 63%;
 
     --radius: 1rem;
 
     /* Custom gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(24 95% 58%) 0%, hsl(35 100% 60%) 50%, hsl(45 100% 65%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(21 96% 63%) 0%, hsl(35 100% 60%) 50%, hsl(45 100% 65%) 100%);
     --gradient-sky: linear-gradient(180deg, hsl(200 85% 55%) 0%, hsl(200 80% 70%) 100%);
     --gradient-warm: linear-gradient(135deg, hsl(40 100% 97%) 0%, hsl(30 80% 95%) 100%);
-    --gradient-sunset: linear-gradient(135deg, hsl(24 95% 58%) 0%, hsl(350 80% 60%) 100%);
+    --gradient-sunset: linear-gradient(135deg, hsl(21 96% 63%) 0%, hsl(350 80% 60%) 100%);
     --gradient-nature: linear-gradient(135deg, hsl(145 45% 50%) 0%, hsl(165 50% 55%) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(24 95% 58% / 0.2);
+    --shadow-soft: 0 4px 20px -4px hsl(21 96% 63% / 0.2);
     --shadow-card: 0 8px 30px -8px hsl(220 30% 15% / 0.1);
     --shadow-elevated: 0 20px 50px -15px hsl(220 30% 15% / 0.15);
 
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 220 30% 15%;
-    --sidebar-primary: 24 95% 58%;
+    --sidebar-primary: 21 96% 63%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 40 30% 95%;
     --sidebar-accent-foreground: 220 30% 15%;
@@ -73,7 +73,7 @@
     --popover: 220 25% 12%;
     --popover-foreground: 40 20% 95%;
 
-    --primary: 24 95% 58%;
+    --primary: 21 96% 63%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 200 85% 55%;
@@ -93,11 +93,11 @@
 
     --border: 220 20% 20%;
     --input: 220 20% 20%;
-    --ring: 24 95% 58%;
+    --ring: 21 96% 63%;
 
-    --sidebar-background: 220 25% 10%;
+    --sidebar-background: 220 30% 8%;
     --sidebar-foreground: 40 20% 95%;
-    --sidebar-primary: 24 95% 58%;
+    --sidebar-primary: 21 96% 63%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 220 20% 18%;
     --sidebar-accent-foreground: 40 20% 95%;
