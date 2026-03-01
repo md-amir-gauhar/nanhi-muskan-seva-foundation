@@ -30,22 +30,27 @@ const ContactSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-24 gradient-warm" id="contact">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section ref={ref} className="py-16 md:py-20 bg-gradient-to-b from-background via-[#FFF5EE]/40 to-background relative overflow-hidden" id="contact">
+      {/* Decorative background elements */}
+      <div className="absolute top-20 right-0 w-72 h-72 bg-[#FA8B46]/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-[#FA8B46]/5 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-primary font-body font-semibold text-sm uppercase tracking-wider">
+            <span className="text-[#FA8B46] font-body font-semibold text-sm uppercase tracking-wider inline-flex items-center gap-2 mb-3">
+              <MessageSquare className="w-4 h-4" />
               Get in Touch
             </span>
-            <h2 className="font-display font-black text-3xl md:text-5xl text-foreground mt-3 mb-6">
-              We'd Love to Hear from You
+            <h2 className="font-display font-black text-3xl md:text-5xl text-foreground mb-4">
+              We'd Love to <span className="text-[#FA8B46]">Hear</span> from You
             </h2>
-            <p className="font-body text-muted-foreground text-lg mb-8 leading-relaxed">
+            <p className="font-body text-muted-foreground text-base mb-8 leading-relaxed">
               Whether you want to volunteer, donate, or simply learn more about
               our work, we're here to help. Every message brings us closer to
               making a difference.
@@ -53,32 +58,42 @@ const ContactSection = () => {
 
             {/* Contact Methods */}
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-primary" />
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="flex items-center gap-4 bg-white rounded-xl p-4 border border-[#FA8B46]/10 hover:border-[#FA8B46]/30 transition-all duration-300 hover:shadow-md group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#FA8B46] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Mail className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-xs text-muted-foreground">
                     Email us at
                   </p>
-                  <p className="font-display font-bold text-foreground">
+                  <a href="mailto:hello@littlehearts.org" className="font-display font-bold text-foreground hover:text-[#FA8B46] transition-colors">
                     hello@littlehearts.org
-                  </p>
+                  </a>
                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-secondary/10 flex items-center justify-center">
-                  <Phone className="w-5 h-5 text-secondary" />
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="flex items-center gap-4 bg-white rounded-xl p-4 border border-[#FA8B46]/10 hover:border-[#FA8B46]/30 transition-all duration-300 hover:shadow-md group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#FA8B46] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Phone className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-xs text-muted-foreground">
                     Call us at
                   </p>
-                  <p className="font-display font-bold text-foreground">
+                  <a href="tel:+919876543210" className="font-display font-bold text-foreground hover:text-[#FA8B46] transition-colors">
                     +91 98765 43210
-                  </p>
+                  </a>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -90,24 +105,24 @@ const ContactSection = () => {
           >
             <form
               onSubmit={handleSubmit}
-              className="card-playful p-8 space-y-6"
+              className="bg-white rounded-3xl p-8 shadow-xl border border-[#FA8B46]/10 space-y-5"
             >
               <div className="space-y-4">
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
                   <Input
                     placeholder="Your Name"
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="pl-12 h-14 rounded-2xl border-border bg-muted/50 font-body focus:ring-primary"
+                    className="pl-12 h-12 rounded-xl border-[#FA8B46]/20 bg-[#FFF5EE]/30 font-body focus:ring-2 focus:ring-[#FA8B46]/30 focus:border-[#FA8B46]"
                     required
                   />
                 </div>
 
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
                   <Input
                     type="email"
                     placeholder="Your Email"
@@ -115,13 +130,13 @@ const ContactSection = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="pl-12 h-14 rounded-2xl border-border bg-muted/50 font-body focus:ring-primary"
+                    className="pl-12 h-12 rounded-xl border-[#FA8B46]/20 bg-[#FFF5EE]/30 font-body focus:ring-2 focus:ring-[#FA8B46]/30 focus:border-[#FA8B46]"
                     required
                   />
                 </div>
 
                 <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground z-10" />
                   <Input
                     type="tel"
                     placeholder="Your Phone (Optional)"
@@ -129,19 +144,19 @@ const ContactSection = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
                     }
-                    className="pl-12 h-14 rounded-2xl border-border bg-muted/50 font-body focus:ring-primary"
+                    className="pl-12 h-12 rounded-xl border-[#FA8B46]/20 bg-[#FFF5EE]/30 font-body focus:ring-2 focus:ring-[#FA8B46]/30 focus:border-[#FA8B46]"
                   />
                 </div>
 
                 <div className="relative">
-                  <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-muted-foreground" />
+                  <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-muted-foreground z-10" />
                   <Textarea
                     placeholder="Your Message"
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="pl-12 pt-4 min-h-[150px] rounded-2xl border-border bg-muted/50 font-body resize-none focus:ring-primary"
+                    className="pl-12 pt-4 min-h-[140px] rounded-xl border-[#FA8B46]/20 bg-[#FFF5EE]/30 font-body resize-none focus:ring-2 focus:ring-[#FA8B46]/30 focus:border-[#FA8B46]"
                     required
                   />
                 </div>
@@ -149,7 +164,7 @@ const ContactSection = () => {
 
               <Button
                 type="submit"
-                className="btn-hero w-full"
+                className="w-full bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white h-12 rounded-xl font-display font-bold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-95"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
