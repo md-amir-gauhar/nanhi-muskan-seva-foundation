@@ -30,11 +30,15 @@ const ContactSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-16 md:py-20 bg-gradient-to-b from-background via-[#FFF5EE]/40 to-background relative overflow-hidden" id="contact">
+    <section
+      ref={ref}
+      className="py-16 md:py-20 bg-gradient-to-b from-background via-[#FFF5EE]/40 to-background relative overflow-hidden"
+      id="contact"
+    >
       {/* Decorative background elements */}
       <div className="absolute top-20 right-0 w-72 h-72 bg-[#FA8B46]/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-0 w-96 h-96 bg-[#FA8B46]/5 rounded-full blur-3xl" />
-      
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
@@ -58,7 +62,7 @@ const ContactSection = () => {
 
             {/* Contact Methods */}
             <div className="space-y-4">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.3 }}
@@ -71,12 +75,15 @@ const ContactSection = () => {
                   <p className="font-body text-xs text-muted-foreground">
                     Email us at
                   </p>
-                  <a href="mailto:hello@littlehearts.org" className="font-display font-bold text-foreground hover:text-[#FA8B46] transition-colors">
+                  <a
+                    href="mailto:hello@littlehearts.org"
+                    className="font-display font-bold text-foreground hover:text-[#FA8B46] transition-colors"
+                  >
                     hello@littlehearts.org
                   </a>
                 </div>
               </motion.div>
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.4 }}
@@ -89,7 +96,10 @@ const ContactSection = () => {
                   <p className="font-body text-xs text-muted-foreground">
                     Call us at
                   </p>
-                  <a href="tel:+919876543210" className="font-display font-bold text-foreground hover:text-[#FA8B46] transition-colors">
+                  <a
+                    href="tel:+919876543210"
+                    className="font-display font-bold text-foreground hover:text-[#FA8B46] transition-colors"
+                  >
                     +91 98765 43210
                   </a>
                 </div>
