@@ -79,13 +79,13 @@ const Gallery = () => {
             className="space-y-8"
           >
             <div>
-              <span className="text-primary font-body font-semibold text-sm uppercase tracking-wider">
+              <span className="text-[#FA8B46] font-body font-semibold text-sm uppercase tracking-wider">
                 Our Mission
               </span>
               <h2 className="font-display font-black text-4xl md:text-6xl text-foreground mt-3 mb-6">
                 Transforming Lives,
                 <br />
-                <span className="text-primary">One Child at a Time</span>
+                <span className="text-[#FA8B46]">One Child at a Time</span>
               </h2>
               <p className="font-body text-lg text-muted-foreground leading-relaxed">
                 We believe every child deserves a chance to dream, learn, and
@@ -100,11 +100,11 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-primary/5 rounded-2xl p-6 border border-primary/10"
+                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Users className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <Users className="w-6 h-6 text-[#FA8B46]" />
                   </div>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-foreground mb-1">
@@ -119,11 +119,11 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-primary/5 rounded-2xl p-6 border border-primary/10"
+                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <GraduationCap className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <GraduationCap className="w-6 h-6 text-[#FA8B46]" />
                   </div>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-foreground mb-1">
@@ -138,11 +138,11 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-primary/5 rounded-2xl p-6 border border-primary/10"
+                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <Heart className="w-6 h-6 text-[#FA8B46]" />
                   </div>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-foreground mb-1">
@@ -157,11 +157,11 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="bg-primary/5 rounded-2xl p-6 border border-primary/10"
+                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Home className="w-6 h-6 text-primary" />
+                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <Home className="w-6 h-6 text-[#FA8B46]" />
                   </div>
                 </div>
                 <h3 className="font-display font-bold text-3xl text-foreground mb-1">
@@ -181,7 +181,7 @@ const Gallery = () => {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex items-start gap-4"
               >
-                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div className="w-2 h-2 rounded-full bg-[#FA8B46] mt-2 flex-shrink-0" />
                 <div>
                   <h4 className="font-body font-semibold text-foreground mb-1">
                     Quality Education
