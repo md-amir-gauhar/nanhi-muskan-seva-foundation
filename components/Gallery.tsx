@@ -68,26 +68,26 @@ const Gallery = () => {
   };
 
   return (
-    <section ref={ref} className="py-16 md:py-24 bg-background" id="gallery">
+    <section ref={ref} className="py-12 md:py-16 bg-background" id="gallery">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Side - Mission & Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div>
-              <span className="text-[#FA8B46] font-body font-semibold text-sm uppercase tracking-wider">
+              <span className="text-[#FA8B46] font-body font-semibold text-xs uppercase tracking-wider">
                 Our Mission
               </span>
-              <h2 className="font-display font-black text-4xl md:text-6xl text-foreground mt-3 mb-6">
+              <h2 className="font-display font-black text-3xl md:text-4xl lg:text-5xl text-foreground mt-2 mb-4">
                 Transforming Lives,
                 <br />
                 <span className="text-[#FA8B46]">One Child at a Time</span>
               </h2>
-              <p className="font-body text-lg text-muted-foreground leading-relaxed">
+              <p className="font-body text-base text-muted-foreground leading-relaxed">
                 We believe every child deserves a chance to dream, learn, and
                 grow. Our foundation works tirelessly to provide education,
                 healthcare, and support to underprivileged children.
@@ -95,22 +95,22 @@ const Gallery = () => {
             </div>
 
             {/* Impact Stats */}
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
+                className="bg-[#FFF5EE] rounded-xl p-4 border border-[#FA8B46]/10"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
-                    <Users className="w-6 h-6 text-[#FA8B46]" />
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-10 h-10 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-[#FA8B46]" />
                   </div>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-foreground mb-1">
+                <h3 className="font-display font-bold text-2xl text-foreground mb-1">
                   500+
                 </h3>
-                <p className="font-body text-sm text-muted-foreground">
+                <p className="font-body text-xs text-muted-foreground">
                   Children Supported
                 </p>
               </motion.div>
@@ -119,17 +119,17 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
+                className="bg-[#FFF5EE] rounded-xl p-4 border border-[#FA8B46]/10"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
-                    <GraduationCap className="w-6 h-6 text-[#FA8B46]" />
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-10 h-10 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <GraduationCap className="w-5 h-5 text-[#FA8B46]" />
                   </div>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-foreground mb-1">
+                <h3 className="font-display font-bold text-2xl text-foreground mb-1">
                   100+
                 </h3>
-                <p className="font-body text-sm text-muted-foreground">
+                <p className="font-body text-xs text-muted-foreground">
                   Students Educated
                 </p>
               </motion.div>
@@ -138,17 +138,17 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
+                className="bg-[#FFF5EE] rounded-xl p-4 border border-[#FA8B46]/10"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-[#FA8B46]" />
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-10 h-10 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <Heart className="w-5 h-5 text-[#FA8B46]" />
                   </div>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-foreground mb-1">
+                <h3 className="font-display font-bold text-2xl text-foreground mb-1">
                   50+
                 </h3>
-                <p className="font-body text-sm text-muted-foreground">
+                <p className="font-body text-xs text-muted-foreground">
                   Healthcare Programs
                 </p>
               </motion.div>
@@ -157,36 +157,36 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="bg-[#FFF5EE] rounded-2xl p-6 border border-[#FA8B46]/10"
+                className="bg-[#FFF5EE] rounded-xl p-4 border border-[#FA8B46]/10"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
-                    <Home className="w-6 h-6 text-[#FA8B46]" />
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-10 h-10 rounded-full bg-[#FA8B46]/10 flex items-center justify-center">
+                    <Home className="w-5 h-5 text-[#FA8B46]" />
                   </div>
                 </div>
-                <h3 className="font-display font-bold text-3xl text-foreground mb-1">
+                <h3 className="font-display font-bold text-2xl text-foreground mb-1">
                   25+
                 </h3>
-                <p className="font-body text-sm text-muted-foreground">
+                <p className="font-body text-xs text-muted-foreground">
                   Communities Reached
                 </p>
               </motion.div>
             </div>
 
-            {/* Mission Points */}
-            <div className="space-y-4">
+            {/* Mission Points - Compact */}
+            <div className="space-y-3">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="flex items-start gap-4"
+                className="flex items-start gap-3"
               >
-                <div className="w-2 h-2 rounded-full bg-[#FA8B46] mt-2 flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#FA8B46] mt-1.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-body font-semibold text-foreground mb-1">
+                  <h4 className="font-body font-semibold text-sm text-foreground">
                     Quality Education
                   </h4>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-xs text-muted-foreground">
                     Providing access to quality education and learning resources
                     for every child.
                   </p>
@@ -197,14 +197,14 @@ const Gallery = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.7 }}
-                className="flex items-start gap-4"
+                className="flex items-start gap-3"
               >
-                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#FA8B46] mt-1.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-body font-semibold text-foreground mb-1">
+                  <h4 className="font-body font-semibold text-sm text-foreground">
                     Healthcare Support
                   </h4>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-xs text-muted-foreground">
                     Ensuring children receive proper medical care and
                     nutritional support.
                   </p>
@@ -215,14 +215,14 @@ const Gallery = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="flex items-start gap-4"
+                className="flex items-start gap-3"
               >
-                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#FA8B46] mt-1.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-body font-semibold text-foreground mb-1">
+                  <h4 className="font-body font-semibold text-sm text-foreground">
                     Emotional Well-being
                   </h4>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-xs text-muted-foreground">
                     Creating safe spaces for children to grow emotionally and
                     socially.
                   </p>
@@ -238,7 +238,7 @@ const Gallery = () => {
             transition={{ duration: 0.8 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-[380px]">
+            <div className="relative w-full max-w-[340px] lg:max-w-[380px]">
               {/* Story Container */}
               <div className="relative aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl bg-black">
                 {/* Progress Bars */}
@@ -280,7 +280,7 @@ const Gallery = () => {
                       alt={`Story ${currentStoryIndex + 1}`}
                       fill
                       sizes="400px"
-                      className="object-cover"
+                      className="object-contain"
                       priority
                     />
                   </motion.div>
