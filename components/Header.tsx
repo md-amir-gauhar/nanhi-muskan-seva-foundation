@@ -101,25 +101,24 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            <ButterflySVG size={16} className="opacity-40 mr-2" />
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.path}
-                className="relative px-3.5 py-2 font-body font-semibold text-sm text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+                className="relative px-2 py-2 font-body font-medium text-sm text-muted-foreground hover:text-primary transition-colors duration-300 group"
               >
                 {link.name}
                 <motion.span
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-primary rounded-full"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
                   initial={false}
-                  animate={{ width: isActive(link.path) ? "60%" : "0%" }}
-                  whileHover={{ width: "60%" }}
+                  animate={{ scaleX: isActive(link.path) ? 1 : 0 }}
+                  whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.25, ease: "easeOut" }}
+                  style={{ originX: 0.5 }}
                 />
               </Link>
             ))}
-            <FlowerSVG size={14} className="opacity-30 ml-2" />
           </nav>
 
           {/* CTA Button */}
@@ -129,7 +128,7 @@ const Header = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <Button className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-display font-bold text-sm shadow-soft hover:shadow-elevated transition-shadow duration-300">
+                <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-full font-display font-bold text-sm shadow-md hover:shadow-lg transition-all duration-300">
                   <Heart className="w-3.5 h-3.5 mr-1.5" fill="currentColor" />
                   Donate Now
                 </Button>

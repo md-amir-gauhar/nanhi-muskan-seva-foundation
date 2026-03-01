@@ -61,22 +61,23 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm rounded-full px-4 py-2 mb-8"
+            className="inline-flex items-center gap-2 bg-primary/90 backdrop-blur-sm rounded-full px-5 py-2 mb-8 shadow-lg"
           >
-            <Heart className="w-4 h-4 text-primary" fill="currentColor" />
-            <span className="text-primary-foreground font-body text-sm font-medium">
+            <Heart className="w-4 h-4 text-white" fill="currentColor" />
+            <span className="text-white font-body text-sm font-semibold">
               Changing Lives Since 2005
             </span>
           </motion.div>
 
           {/* Main Heading */}
-          <h1 className="font-display font-black text-4xl md:text-6xl lg:text-7xl text-primary-foreground mb-6 leading-tight">
+          <h1 className="font-display font-black text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight drop-shadow-lg">
             Every Child Deserves a{" "}
-            <span className="text-primary">Brighter</span> Tomorrow
+            <span className="text-primary drop-shadow-xl">Brighter</span>{" "}
+            Tomorrow
           </h1>
 
           {/* Subtitle */}
-          <p className="font-body text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="font-body text-base md:text-lg text-white/90 max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md">
             Join us in our mission to provide education, healthcare, and hope to
             underprivileged children. Together, we can create a world where
             every child thrives.
@@ -87,10 +88,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <a href="/donate-us">
-              <Button className="btn-hero text-lg px-10 py-6">
+              <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-6 rounded-full font-display font-bold text-base shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95">
                 <Heart className="w-5 h-5 mr-2" fill="currentColor" />
                 Donate Now
               </Button>
@@ -98,7 +99,7 @@ const HeroSection = () => {
             <a href="#programs">
               <Button
                 variant="outline"
-                className="bg-transparent border-2 border-primary-foreground/80 text-primary-foreground hover:bg-primary-foreground hover:text-foreground active:scale-[0.97] px-10 py-6 rounded-full font-display font-bold text-lg transition-all duration-200 ease-out"
+                className="bg-transparent border-2 border-white/60 text-white hover:bg-white hover:text-gray-900 px-8 py-6 rounded-full font-display font-bold text-base transition-all duration-200 ease-out hover:scale-105 active:scale-95"
               >
                 Learn More
               </Button>
@@ -110,38 +111,38 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="grid grid-cols-3 gap-8 mt-16 max-w-2xl mx-auto"
+            className="grid grid-cols-3 gap-8 max-w-3xl mx-auto"
           >
             {[
               { number: "15K+", label: "Children Helped" },
-              { number: "50+", label: "Programs" },
+              { number: "5+", label: "Programs" },
               { number: "100+", label: "Volunteers" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <span className="font-display font-black text-3xl md:text-4xl text-primary">
+                <div className="font-display font-black text-4xl md:text-5xl text-primary drop-shadow-lg">
                   {stat.number}
-                </span>
-                <span className="block font-body text-sm text-primary-foreground/70 mt-1">
+                </div>
+                <div className="font-body text-sm md:text-base text-white/80 mt-2">
                   {stat.label}
-                </span>
+                </div>
               </div>
             ))}
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator - Hidden on mobile */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-10 h-10 rounded-full bg-primary-foreground/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-primary-foreground/30 transition-colors"
+            className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors"
           >
-            <ArrowDown className="w-5 h-5 text-primary-foreground" />
+            <ArrowDown className="w-5 h-5 text-white" />
           </motion.div>
         </motion.div>
       </div>
