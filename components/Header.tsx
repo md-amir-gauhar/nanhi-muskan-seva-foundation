@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -72,23 +73,15 @@ const Header = () => {
           <Link href="/" className="flex items-center gap-2.5 group">
             <motion.div
               style={{ scale: logoScale }}
-              className="relative w-10 h-10 rounded-xl bg-[#FA8B46] flex items-center justify-center shadow-soft group-hover:shadow-elevated transition-shadow duration-300"
+              className="relative w-10 h-10 rounded-xl overflow-hidden shadow-soft group-hover:shadow-elevated transition-shadow duration-300"
             >
-              <Heart
-                className="w-5 h-5 text-primary-foreground"
-                fill="currentColor"
+              <Image
+                src="/logo.jpg"
+                alt="Nanhi Muskan Seva Foundation Logo"
+                fill
+                className="object-cover"
+                priority
               />
-              <motion.div
-                className="absolute -top-1 -right-1"
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <FlowerSVG size={12} />
-              </motion.div>
             </motion.div>
             <motion.div style={{ scale: logoScale }}>
               <span className="font-display font-bold text-lg text-foreground leading-tight">

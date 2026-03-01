@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Heart,
   Mail,
@@ -23,8 +24,13 @@ const Footer = () => {
           {/* About Section */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-[#FA8B46] flex items-center justify-center shadow-lg">
-                <Heart className="w-6 h-6 text-white" fill="currentColor" />
+              <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg relative">
+                <Image
+                  src="/logo.jpg"
+                  alt="Nanhi Muskan Seva Foundation Logo"
+                  fill
+                  className="object-cover"
+                />
               </div>
               <div>
                 <span className="font-display font-bold text-xl text-white">
