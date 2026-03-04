@@ -1,177 +1,287 @@
 "use client";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Play, Pause, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useRef } from "react";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 
 const videos = [
   {
     id: 1,
-    title: "Education Program",
-    description: "See how we're transforming lives through education",
-    thumbnail:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    title: "Community Support",
+    description: "Empowering communities through grassroots action",
+    videoUrl: "/vids/1771482153720582.mp4",
   },
   {
     id: 2,
-    title: "Healthcare Camp",
-    description: "Our medical teams bringing care to remote villages",
-    thumbnail:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    title: "Making Impact",
+    description: "Real change through small actions",
+    videoUrl: "/vids/1771482330175695.mp4",
   },
   {
     id: 3,
-    title: "Community Kitchen",
-    description: "Feeding over 1000 children daily",
-    thumbnail:
-      "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    title: "Our Mission",
+    description: "Serving humanity with care",
+    videoUrl: "/vids/IMG_1015.MOV",
   },
   {
     id: 4,
-    title: "Sports Day",
-    description: "Building confidence through physical activities",
-    thumbnail:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    title: "Health & Well-being",
+    description: "Supporting health initiatives in communities",
+    videoUrl: "/vids/IMG_1325.MOV",
+  },
+  {
+    id: 5,
+    title: "Education Support",
+    description: "Building awareness and knowledge",
+    videoUrl: "/vids/IMG_1480.MOV",
+  },
+  {
+    id: 6,
+    title: "Community Care",
+    description: "Working together for a better tomorrow",
+    videoUrl: "/vids/IMG_1519.MOV",
+  },
+  {
+    id: 7,
+    title: "Environmental Action",
+    description: "Caring for our planet and animals",
+    videoUrl: "/vids/IMG_1744.MOV",
   },
 ];
 
 const VideoCarousel = () => {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playingVideos, setPlayingVideos] = useState<Set<number>>(new Set());
+  const [mutedVideos, setMutedVideos] = useState<Set<number>>(
+    new Set([0, 1, 2, 3, 4, 5, 6]),
+  );
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % videos.length);
-    setIsPlaying(false);
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = parseInt(
+            entry.target.getAttribute("data-index") || "0",
+          );
+          const video = videoRefs.current[index];
 
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + videos.length) % videos.length);
-    setIsPlaying(false);
-  };
+          if (entry.isIntersecting && entry.intersectionRatio > 0.7) {
+            setActiveIndex(index);
+            if (video) {
+              video.play().catch(() => {});
+              setPlayingVideos((prev) => new Set(prev).add(index));
+            }
+          } else {
+            if (video) {
+              video.pause();
+              setPlayingVideos((prev) => {
+                const newSet = new Set(prev);
+                newSet.delete(index);
+                return newSet;
+              });
+            }
+          }
+        });
+      },
+      { threshold: [0.7], root: scrollContainerRef.current },
+    );
 
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
+    videoRefs.current.forEach((video) => {
+      if (video) observer.observe(video);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const togglePlay = (index: number) => {
+    const video = videoRefs.current[index];
+    if (video) {
+      if (playingVideos.has(index)) {
+        video.pause();
+        setPlayingVideos((prev) => {
+          const newSet = new Set(prev);
+          newSet.delete(index);
+          return newSet;
+        });
       } else {
-        videoRef.current.play();
+        video.play().catch(() => {});
+        setPlayingVideos((prev) => new Set(prev).add(index));
       }
-      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = (index: number) => {
+    const video = videoRefs.current[index];
+    if (video) {
+      video.muted = !video.muted;
+      setMutedVideos((prev) => {
+        const newSet = new Set(prev);
+        if (video.muted) {
+          newSet.add(index);
+        } else {
+          newSet.delete(index);
+        }
+        return newSet;
+      });
     }
   };
 
   return (
-    <section ref={ref} className="py-24 bg-foreground" id="programs">
+    <section
+      ref={ref}
+      className="py-20 bg-linear-to-b from-white to-[#FFF5EE]"
+      id="programs"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <span className="text-primary font-body font-semibold text-sm uppercase tracking-wider">
+          <span className="text-[#FA8B46] font-body font-semibold text-sm uppercase tracking-wider">
             Our Stories
           </span>
-          <h2 className="font-display font-black text-3xl md:text-5xl text-background mt-3 mb-4">
+          <h2 className="font-display font-black text-3xl md:text-5xl text-foreground mt-3 mb-4">
             Watch Our Impact
           </h2>
-          <p className="font-body text-background/70 max-w-2xl mx-auto">
+          <p className="font-body text-muted-foreground max-w-2xl mx-auto">
             Real stories from the ground. See how your support transforms lives
             every day.
           </p>
         </motion.div>
 
-        {/* Main Video Display - Vertical/Reel Style */}
+        {/* Horizontal Scrolling Reels */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-md mx-auto"
         >
-          <div className="relative aspect-[9/16] rounded-4xl overflow-hidden shadow-elevated bg-muted">
-            <video
-              ref={videoRef}
-              src={videos[activeIndex].videoUrl}
-              poster={videos[activeIndex].thumbnail}
-              className="w-full h-full object-cover"
-              loop
-              playsInline
-            />
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 px-2"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {videos.map((video, index) => (
+              <div
+                key={video.id}
+                data-index={index}
+                className="shrink-0 w-70 md:w-80 snap-center"
+              >
+                <div className="relative aspect-9/16 rounded-2xl overflow-hidden shadow-lg bg-black group">
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[index] = el;
+                    }}
+                    src={video.videoUrl}
+                    className="w-full h-full object-cover"
+                    loop
+                    playsInline
+                    muted
+                    preload="metadata"
+                  />
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-foreground/80" />
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/70 pointer-events-none" />
 
-            {/* Play Button */}
-            <button
-              onClick={togglePlay}
-              aria-label={isPlaying ? "Pause video" : "Play video"}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center shadow-elevated hover:scale-110 active:scale-95 transition-transform duration-150"
-            >
-              {isPlaying ? (
-                <Pause
-                  className="w-8 h-8 text-primary-foreground"
-                  fill="currentColor"
-                />
-              ) : (
-                <Play
-                  className="w-8 h-8 text-primary-foreground ml-1"
-                  fill="currentColor"
-                />
-              )}
-            </button>
+                  {/* Play/Pause Button */}
+                  <button
+                    onClick={() => togglePlay(index)}
+                    aria-label={
+                      playingVideos.has(index) ? "Pause video" : "Play video"
+                    }
+                    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg transition-all duration-300 ${
+                      playingVideos.has(index)
+                        ? "opacity-0 group-hover:opacity-100"
+                        : "opacity-100"
+                    } hover:scale-110 active:scale-95`}
+                  >
+                    {playingVideos.has(index) ? (
+                      <Pause
+                        className="w-7 h-7 text-[#FA8B46]"
+                        fill="currentColor"
+                      />
+                    ) : (
+                      <Play
+                        className="w-7 h-7 text-[#FA8B46] ml-1"
+                        fill="currentColor"
+                      />
+                    )}
+                  </button>
 
-            {/* Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <h3 className="font-display font-bold text-xl text-background mb-2">
-                {videos[activeIndex].title}
-              </h3>
-              <p className="font-body text-background/80 text-sm">
-                {videos[activeIndex].description}
-              </p>
-            </div>
+                  {/* Mute/Unmute Button */}
+                  <button
+                    onClick={() => toggleMute(index)}
+                    aria-label={
+                      mutedVideos.has(index) ? "Unmute video" : "Mute video"
+                    }
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center hover:bg-black/70 transition-all duration-200 z-10"
+                  >
+                    {mutedVideos.has(index) ? (
+                      <VolumeX className="w-5 h-5 text-white" />
+                    ) : (
+                      <Volume2 className="w-5 h-5 text-white" />
+                    )}
+                  </button>
 
-            {/* Navigation */}
-            <button
-              onClick={prevSlide}
-              aria-label="Previous video"
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center hover:bg-background/40 active:scale-90 transition-all duration-150"
-            >
-              <ChevronLeft className="w-6 h-6 text-background" />
-            </button>
-            <button
-              onClick={nextSlide}
-              aria-label="Next video"
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background/20 backdrop-blur-sm flex items-center justify-center hover:bg-background/40 active:scale-90 transition-all duration-150"
-            >
-              <ChevronRight className="w-6 h-6 text-background" />
-            </button>
+                  {/* Active indicator */}
+                  {activeIndex === index && (
+                    <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-[#FA8B46] animate-pulse" />
+                  )}
+
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="font-display font-bold text-lg text-white mb-1">
+                      {video.title}
+                    </h3>
+                    <p className="font-body text-white/90 text-sm">
+                      {video.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* Dots */}
+          {/* Scroll indicator */}
           <div className="flex justify-center gap-2 mt-6">
             {videos.map((_, index) => (
               <button
                 key={index}
                 onClick={() => {
-                  setActiveIndex(index);
-                  setIsPlaying(false);
+                  const container = scrollContainerRef.current;
+                  const video = videoRefs.current[index];
+                  if (container && video) {
+                    video.scrollIntoView({
+                      behavior: "smooth",
+                      inline: "center",
+                      block: "nearest",
+                    });
+                  }
                 }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === activeIndex
-                    ? "w-8 bg-primary"
-                    : "bg-background/30 hover:bg-background/50"
+                aria-label={`Go to video ${index + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeIndex === index
+                    ? "w-8 bg-[#FA8B46]"
+                    : "w-2 bg-gray-300 hover:bg-gray-400"
                 }`}
               />
             ))}
           </div>
         </motion.div>
       </div>
+
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 };
