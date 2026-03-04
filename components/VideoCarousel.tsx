@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
 const videos = [
@@ -53,9 +53,6 @@ const VideoCarousel = () => {
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
   const [activeIndex, setActiveIndex] = useState(0);
   const [playingVideos, setPlayingVideos] = useState<Set<number>>(new Set());
-  const [mutedVideos, setMutedVideos] = useState<Set<number>>(
-    new Set([0, 1, 2, 3, 4, 5, 6]),
-  );
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -110,22 +107,6 @@ const VideoCarousel = () => {
         video.play().catch(() => {});
         setPlayingVideos((prev) => new Set(prev).add(index));
       }
-    }
-  };
-
-  const toggleMute = (index: number) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      video.muted = !video.muted;
-      setMutedVideos((prev) => {
-        const newSet = new Set(prev);
-        if (video.muted) {
-          newSet.add(index);
-        } else {
-          newSet.delete(index);
-        }
-        return newSet;
-      });
     }
   };
 
@@ -215,21 +196,6 @@ const VideoCarousel = () => {
                     )}
                   </button>
 
-                  {/* Mute/Unmute Button */}
-                  <button
-                    onClick={() => toggleMute(index)}
-                    aria-label={
-                      mutedVideos.has(index) ? "Unmute video" : "Mute video"
-                    }
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center hover:bg-black/70 transition-all duration-200 z-10"
-                  >
-                    {mutedVideos.has(index) ? (
-                      <VolumeX className="w-5 h-5 text-white" />
-                    ) : (
-                      <Volume2 className="w-5 h-5 text-white" />
-                    )}
-                  </button>
-
                   {/* Active indicator */}
                   {activeIndex === index && (
                     <div className="absolute top-4 left-4 w-2 h-2 rounded-full bg-[#FA8B46] animate-pulse" />
@@ -246,32 +212,6 @@ const VideoCarousel = () => {
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Scroll indicator */}
-          <div className="flex justify-center gap-2 mt-6">
-            {videos.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  const container = scrollContainerRef.current;
-                  const video = videoRefs.current[index];
-                  if (container && video) {
-                    video.scrollIntoView({
-                      behavior: "smooth",
-                      inline: "center",
-                      block: "nearest",
-                    });
-                  }
-                }}
-                aria-label={`Go to video ${index + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  activeIndex === index
-                    ? "w-8 bg-[#FA8B46]"
-                    : "w-2 bg-gray-300 hover:bg-gray-400"
-                }`}
-              />
             ))}
           </div>
         </motion.div>
