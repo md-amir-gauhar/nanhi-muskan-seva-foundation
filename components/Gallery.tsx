@@ -281,6 +281,7 @@ const Gallery = () => {
                       fill
                       sizes="400px"
                       className="object-contain"
+                      quality={80}
                       priority
                     />
                   </motion.div>

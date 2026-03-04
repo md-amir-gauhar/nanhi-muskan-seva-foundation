@@ -30,6 +30,8 @@ const Footer = () => {
                   alt="Nanhi Muskan Seva Foundation Logo"
                   fill
                   className="object-cover"
+                  quality={85}
+                  sizes="48px"
                 />
               </div>
               <div>

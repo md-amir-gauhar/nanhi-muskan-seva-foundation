@@ -103,10 +103,11 @@ const ImageCarousel = () => {
                   alt={image.title}
                   fill
                   className="object-cover"
+                  quality={75}
                   priority={index === 0}
                   sizes="(max-width: 1280px) 100vw, 1280px"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-foreground/70 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
                   <h3 className="font-display font-bold text-2xl md:text-3xl text-background mb-2">
                     {image.title}
@@ -152,6 +153,7 @@ const ImageCarousel = () => {
                   alt={image.title}
                   fill
                   className="object-cover"
+                  quality={60}
                   sizes="80px"
                 />
               </button>

@@ -80,6 +80,8 @@ const Header = () => {
                 alt="Nanhi Muskan Seva Foundation Logo"
                 fill
                 className="object-cover"
+                quality={90}
+                sizes="40px"
                 priority
               />
             </motion.div>
