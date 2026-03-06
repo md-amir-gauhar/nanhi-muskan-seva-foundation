@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
@@ -34,7 +34,7 @@ declare global {
   }
 }
 
-const DonatePage = () => {
+const DonatePageContent = () => {
   const searchParams = useSearchParams();
   const campaignId = searchParams.get("campaign");
 
@@ -571,4 +571,16 @@ const DonatePage = () => {
   );
 };
 
-export default DonatePage;
+export default function DonatePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-[#FFF5EE]">
+          <div className="inline-block w-8 h-8 border-4 border-[#FA8B46] border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      }
+    >
+      <DonatePageContent />
+    </Suspense>
+  );
+}
