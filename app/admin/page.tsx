@@ -28,10 +28,8 @@ interface DashboardStats {
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("overview");
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [userName, setUserName] = useState("Admin");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -60,15 +58,6 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch("/api/admin/logout", { method: "POST" });
-      router.push("/admin/login");
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
-
   if (!isAuthenticated && !loading) {
     return null; // Will redirect
   }
@@ -94,7 +83,10 @@ export default function AdminDashboard() {
                       Total Donations
                     </p>
                     <p className="text-3xl font-bold text-gray-900 mt-2">
-                      ₹{stats?.totalDonationsAmount.toLocaleString() || 0}
+                      ₹
+                      {(
+                        (stats?.totalDonationsAmount || 0) / 100
+                      ).toLocaleString()}
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
                       {stats?.totalDonationsCount || 0} transactions
@@ -201,7 +193,7 @@ export default function AdminDashboard() {
                         </div>
                         <div className="text-right">
                           <p className="font-semibold text-primary">
-                            ₹{donation.amount.toLocaleString()}
+                            ₹{(donation.amount / 100).toLocaleString()}
                           </p>
                           <p className="text-xs text-gray-500">
                             {new Date(donation.createdAt).toLocaleDateString()}
@@ -239,13 +231,17 @@ export default function AdminDashboard() {
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
                             <div
-                              className="bg-primary h-2 rounded-full transition-all"
+                              className="bg-green-500 h-2 rounded-full transition-all"
                               style={{ width: `${Math.min(progress, 100)}%` }}
                             />
                           </div>
                           <div className="flex items-center justify-between text-xs text-gray-500">
-                            <span>₹{campaign.raised.toLocaleString()}</span>
-                            <span>Goal: ₹{campaign.goal.toLocaleString()}</span>
+                            <span>
+                              ₹{(campaign.raised / 100).toLocaleString()}
+                            </span>
+                            <span>
+                              Goal: ₹{(campaign.goal / 100).toLocaleString()}
+                            </span>
                           </div>
                         </div>
                       );

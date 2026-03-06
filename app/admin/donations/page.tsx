@@ -175,36 +175,6 @@ export default function AdminDonationsPage() {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white rounded-xl p-4 mb-6 border border-gray-200">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search by name, email, or order ID..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-gray-500" />
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
-            >
-              <option value="all">All Status</option>
-              <option value="success">Success</option>
-              <option value="created">Pending</option>
-              <option value="failed">Failed</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
       {/* Donations Table */}
       <div className="bg-white rounded-xl overflow-hidden border border-gray-200">
         <div className="overflow-x-auto">
@@ -250,10 +220,7 @@ export default function AdminDonationsPage() {
                 </tr>
               ) : (
                 filteredDonations.map((donation) => (
-                  <tr
-                    key={donation.id}
-                    className="hover:bg-[#1B2232]/50 transition-colors"
-                  >
+                  <tr key={donation.id}>
                     <td className="px-6 py-4">
                       <div className="flex flex-col">
                         <span className="font-medium">
@@ -282,7 +249,7 @@ export default function AdminDonationsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="text-sm text-gray-300">
+                      <span className="text-sm font-medium text-gray-900">
                         {donation.campaign?.title || "General Donation"}
                       </span>
                     </td>
