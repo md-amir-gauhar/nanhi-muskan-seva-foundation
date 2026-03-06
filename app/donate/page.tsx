@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 interface Campaign {
   id: string;
@@ -106,12 +107,32 @@ const DonatePage = () => {
     const selectedAmount = getSelectedAmount();
 
     if (!selectedAmount || selectedAmount < 1) {
-      alert("Please enter a valid amount");
+      toast.error("Please enter a valid donation amount");
       return;
     }
 
     if (!donorName || !donorEmail || !donorPhone) {
-      alert("Please fill in all required fields");
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(donorEmail)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    // Phone validation
+    const phoneRegex = /^[+]?[\d\s-]{10,}$/;
+    if (!phoneRegex.test(donorPhone)) {
+      toast.error("Please enter a valid phone number");
+      return;
+    }
+
+    // PAN validation (if provided)
+    if (donorPan && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(donorPan)) {
+      toast.error("Please enter a valid PAN number (e.g., ABCDE1234F)");
       return;
     }
 
@@ -138,7 +159,7 @@ const DonatePage = () => {
       const orderData = await orderResponse.json();
 
       if (!orderData.success) {
-        throw new Error("Failed to create order");
+        throw new Error(orderData.error || "Failed to create order");
       }
 
       // Initialize Razorpay
@@ -154,6 +175,8 @@ const DonatePage = () => {
         order_id: orderData.orderId,
         handler: async function (response: any) {
           try {
+            toast.loading("Verifying payment...");
+
             // Verify payment
             const verifyResponse = await fetch("/api/donation/verify", {
               method: "POST",
@@ -170,10 +193,12 @@ const DonatePage = () => {
             const verifyData = await verifyResponse.json();
 
             if (verifyData.success) {
-              // Show success message
-              alert(
-                `Thank you for your donation of ₹${selectedAmount}! A receipt has been sent to your email.`,
+              toast.dismiss();
+              toast.success(
+                `Thank you for your donation of ₹${selectedAmount}! A receipt has been sent to ${donorEmail}.`,
+                { duration: 6000 },
               );
+
               // Reset form
               setAmount("");
               setCustomAmount("");
@@ -182,16 +207,24 @@ const DonatePage = () => {
               setDonorPhone("");
               setDonorPan("");
               setIsAnonymous(false);
+
               // Refresh campaign data
               if (campaignId) {
                 fetchCampaign();
               }
             } else {
-              alert("Payment verification failed. Please contact support.");
+              toast.dismiss();
+              toast.error(
+                "Payment verification failed. Please contact support with your payment ID: " +
+                  response.razorpay_payment_id,
+              );
             }
           } catch (error) {
             console.error("Verification error:", error);
-            alert("Payment verification failed. Please contact support.");
+            toast.dismiss();
+            toast.error(
+              "Payment verification failed. Please contact support if amount was deducted.",
+            );
           } finally {
             setLoading(false);
           }
@@ -207,15 +240,38 @@ const DonatePage = () => {
         modal: {
           ondismiss: function () {
             setLoading(false);
+            toast.info("Payment cancelled");
           },
+          escape: true,
+          animation: true,
+          confirm_close: false,
         },
       };
 
+      if (!window.Razorpay) {
+        throw new Error(
+          "Razorpay SDK not loaded. Please refresh and try again.",
+        );
+      }
+
       const razorpay = new window.Razorpay(options);
+
+      razorpay.on("payment.failed", function (response: any) {
+        setLoading(false);
+        toast.error(
+          `Payment failed: ${response.error.description}. Please try again.`,
+        );
+        console.error("Payment failed:", response.error);
+      });
+
       razorpay.open();
     } catch (error) {
       console.error("Payment error:", error);
-      alert("Failed to initiate payment. Please try again.");
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Failed to initiate payment. Please try again.",
+      );
       setLoading(false);
     }
   };

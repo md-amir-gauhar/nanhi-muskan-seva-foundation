@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, Quicksand } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunito.variable} ${quicksand.variable} antialiased`}>
         {children}
+        <Toaster position="top-right" richColors closeButton duration={4000} />
       </body>
     </html>
   );

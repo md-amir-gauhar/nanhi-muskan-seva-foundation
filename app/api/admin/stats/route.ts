@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     // Get all stats in parallel
     const [
       totalDonations,
-      totalDonors,
+      uniqueDonorEmails,
       activeCampaigns,
       pendingContacts,
       recentDonations,
@@ -24,9 +24,11 @@ export async function GET(request: NextRequest) {
         _sum: { amount: true },
         _count: true,
       }),
-      // Total unique donors
-      prisma.user.count({
-        where: { role: "user" },
+      // Total unique donors (count unique emails from successful donations)
+      prisma.donation.findMany({
+        where: { status: "success" },
+        select: { donorEmail: true },
+        distinct: ["donorEmail"],
       }),
       // Active campaigns
       prisma.campaign.count({
@@ -67,7 +69,7 @@ export async function GET(request: NextRequest) {
       data: {
         totalDonationsAmount: totalDonations._sum.amount || 0,
         totalDonationsCount: totalDonations._count || 0,
-        totalDonors,
+        totalDonors: uniqueDonorEmails.length,
         activeCampaigns,
         pendingContacts,
         recentDonations,

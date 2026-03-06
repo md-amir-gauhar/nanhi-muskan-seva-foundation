@@ -3,28 +3,77 @@ import { z } from "zod";
 import Razorpay from "razorpay";
 import { prisma } from "@/db/prisma";
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
-
 const createOrderSchema = z.object({
-  amount: z.number().min(1, "Amount must be at least ₹1"),
-  donorName: z.string().min(2, "Name is required"),
-  donorEmail: z.string().email("Invalid email"),
-  donorPhone: z.string().min(10, "Valid phone number required"),
-  donorPan: z.string().optional(),
+  amount: z
+    .number()
+    .min(1, "Amount must be at least ₹1")
+    .max(10000000, "Amount too large"),
+  donorName: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name too long"),
+  donorEmail: z
+    .string()
+    .email("Invalid email address")
+    .max(255, "Email too long"),
+  donorPhone: z
+    .string()
+    .min(10, "Phone number must be at least 10 digits")
+    .max(15, "Phone number too long"),
+  donorPan: z
+    .string()
+    .regex(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format")
+    .optional()
+    .or(z.literal("")),
   isAnonymous: z.boolean().default(false),
   campaignId: z.string().optional(),
 });
 
 export async function POST(request: NextRequest) {
   try {
+    // Validate environment variables
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+      console.error("Razorpay credentials missing:", {
+        hasKeyId: !!process.env.RAZORPAY_KEY_ID,
+        hasKeySecret: !!process.env.RAZORPAY_KEY_SECRET,
+      });
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            "Payment service not configured. Please contact administrator.",
+        },
+        { status: 500 },
+      );
+    }
+
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+
     const body = await request.json();
     const validatedData = createOrderSchema.parse(body);
 
     // Convert amount to paise (Razorpay uses smallest currency unit)
     const amountInPaise = Math.round(validatedData.amount * 100);
+
+    // Verify campaign exists if campaignId provided
+    if (validatedData.campaignId) {
+      const campaign = await prisma.campaign.findUnique({
+        where: { id: validatedData.campaignId },
+      });
+
+      if (!campaign) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Campaign not found",
+          },
+          { status: 404 },
+        );
+      }
+    }
 
     // Create Razorpay order
     const order = await razorpay.orders.create({
@@ -68,17 +117,34 @@ export async function POST(request: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         {
+          success: false,
           error: "Validation error",
-          details: error.issues,
+          details: error.issues.map((issue) => ({
+            field: issue.path.join("."),
+            message: issue.message,
+          })),
         },
         { status: 400 },
       );
     }
 
     console.error("Create order error:", error);
+
+    // Handle Razorpay specific errors
+    if (error && typeof error === "object" && "statusCode" in error) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Payment gateway error. Please try again.",
+        },
+        { status: 500 },
+      );
+    }
+
     return NextResponse.json(
       {
-        error: "Failed to create donation order",
+        success: false,
+        error: "Failed to create donation order. Please try again.",
       },
       { status: 500 },
     );
