@@ -1,8 +1,9 @@
-import { GetServerSideProps } from "next";
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Users,
@@ -14,9 +15,6 @@ import {
   Target,
   Loader2,
 } from "lucide-react";
-import { IncomingMessage } from "http";
-import { NextApiRequestCookies } from "next/dist/server/api-utils";
-import { getAuthUser } from "@/lib/auth";
 
 interface DashboardStats {
   totalDonationsAmount: number;
@@ -28,29 +26,35 @@ interface DashboardStats {
   topCampaigns: any[];
 }
 
-interface AdminDashboardProps {
-  userName: string;
-}
-
-export default function AdminDashboard({ userName }: AdminDashboardProps) {
+export default function AdminDashboard() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("overview");
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState("Admin");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    fetchStats();
+    checkAuth();
   }, []);
 
-  const fetchStats = async () => {
+  const checkAuth = async () => {
     try {
       const response = await fetch("/api/admin/stats");
-      const data = await response.json();
-      if (data.success) {
-        setStats(data.data);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          setStats(data.data);
+          setIsAuthenticated(true);
+        } else {
+          router.push("/admin/login");
+        }
+      } else {
+        router.push("/admin/login");
       }
     } catch (error) {
-      console.error("Failed to fetch stats:", error);
+      console.error("Auth check failed:", error);
+      router.push("/admin/login");
     } finally {
       setLoading(false);
     }
@@ -64,6 +68,10 @@ export default function AdminDashboard({ userName }: AdminDashboardProps) {
       console.error("Logout failed:", error);
     }
   };
+
+  if (!isAuthenticated && !loading) {
+    return null; // Will redirect
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -312,24 +320,3 @@ export default function AdminDashboard({ userName }: AdminDashboardProps) {
     </div>
   );
 }
-
-// Protect admin routes - require authentication and admin role
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const user = getAuthUser(context.req);
-
-  if (!user || user.role !== "admin") {
-    return {
-      redirect: {
-        destination: "/admin/login",
-        permanent: false,
-      },
-    };
-  }
-
-  // Optionally fetch user details from database if needed
-  return {
-    props: {
-      userName: "Admin", // You can fetch actual name from database using user.id
-    },
-  };
-};
