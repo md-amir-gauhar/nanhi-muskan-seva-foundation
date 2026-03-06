@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { Resend } from "resend";
 import { prisma } from "@/db/prisma";
@@ -13,17 +13,10 @@ const contactSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request: NextRequest) {
   try {
-    // Validate request body
-    const validatedData = contactSchema.parse(req.body);
+    const body = await request.json();
+    const validatedData = contactSchema.parse(body);
 
     // Save to database
     const contact = await prisma.contact.create({
@@ -62,29 +55,38 @@ export default async function handler(
         <p>Dear ${validatedData.name},</p>
         <p>We have received your message and will get back to you as soon as possible.</p>
         <p>Your message:</p>
-        <p style="padding: 15px; background-color: #f5f5f5; border-left: 4px solid #ff6b35;">
+        <p style="padding: 15px; background-color: #f5f5f5; border-left: 4px solid #FA8B46;">
           ${validatedData.message}
         </p>
-        <p>Best regards,<br/>Bright Child Cause Team</p>
+        <p>Best regards,<br/>Nanhi Muskan Seva Foundation Team</p>
       `,
     });
 
-    return res.status(200).json({
-      success: true,
-      message: "Contact form submitted successfully",
-      data: contact,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Contact form submitted successfully",
+        data: contact,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        error: "Validation error",
-        details: error.issues,
-      });
+      return NextResponse.json(
+        {
+          error: "Validation error",
+          details: error.issues,
+        },
+        { status: 400 },
+      );
     }
 
     console.error("Contact form error:", error);
-    return res.status(500).json({
-      error: "Failed to submit contact form",
-    });
+    return NextResponse.json(
+      {
+        error: "Failed to submit contact form",
+      },
+      { status: 500 },
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import Razorpay from "razorpay";
 import { prisma } from "@/db/prisma";
@@ -18,16 +18,10 @@ const createOrderSchema = z.object({
   campaignId: z.string().optional(),
 });
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request: NextRequest) {
   try {
-    const validatedData = createOrderSchema.parse(req.body);
+    const body = await request.json();
+    const validatedData = createOrderSchema.parse(body);
 
     // Convert amount to paise (Razorpay uses smallest currency unit)
     const amountInPaise = Math.round(validatedData.amount * 100);
@@ -60,24 +54,33 @@ export default async function handler(
       },
     });
 
-    return res.status(200).json({
-      success: true,
-      orderId: order.id,
-      amount: amountInPaise,
-      currency: order.currency,
-      donationId: donation.id,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        orderId: order.id,
+        amount: amountInPaise,
+        currency: order.currency,
+        donationId: donation.id,
+      },
+      { status: 200 },
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        error: "Validation error",
-        details: error.issues,
-      });
+      return NextResponse.json(
+        {
+          error: "Validation error",
+          details: error.issues,
+        },
+        { status: 400 },
+      );
     }
 
     console.error("Create order error:", error);
-    return res.status(500).json({
-      error: "Failed to create donation order",
-    });
+    return NextResponse.json(
+      {
+        error: "Failed to create donation order",
+      },
+      { status: 500 },
+    );
   }
 }

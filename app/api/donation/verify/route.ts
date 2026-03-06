@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import crypto from "crypto";
 import { Resend } from "resend";
@@ -12,18 +12,10 @@ const verifyPaymentSchema = z.object({
   signature: z.string(),
 });
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request: NextRequest) {
   try {
-    const { orderId, paymentId, signature } = verifyPaymentSchema.parse(
-      req.body,
-    );
+    const body = await request.json();
+    const { orderId, paymentId, signature } = verifyPaymentSchema.parse(body);
 
     // Verify Razorpay signature
     const generatedSignature = crypto
@@ -32,9 +24,12 @@ export default async function handler(
       .digest("hex");
 
     if (generatedSignature !== signature) {
-      return res.status(400).json({
-        error: "Invalid payment signature",
-      });
+      return NextResponse.json(
+        {
+          error: "Invalid payment signature",
+        },
+        { status: 400 },
+      );
     }
 
     // Update donation status
@@ -84,7 +79,7 @@ export default async function handler(
         <p>Your contribution will help us make a difference in the lives of underprivileged children.</p>
         <p>This is your official receipt for tax purposes.</p>
         
-        <p>With gratitude,<br/>Bright Child Cause Team</p>
+        <p>With gratitude,<br/>Nanhi Muskan Seva Foundation Team</p>
       `,
     });
 
@@ -94,26 +89,35 @@ export default async function handler(
       data: { receiptSent: true },
     });
 
-    return res.status(200).json({
-      success: true,
-      message: "Payment verified successfully",
-      donation: {
-        id: donation.id,
-        amount: donation.amount / 100,
-        status: donation.status,
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Payment verified successfully",
+        donation: {
+          id: donation.id,
+          amount: donation.amount / 100,
+          status: donation.status,
+        },
       },
-    });
+      { status: 200 },
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        error: "Validation error",
-        details: error.issues,
-      });
+      return NextResponse.json(
+        {
+          error: "Validation error",
+          details: error.issues,
+        },
+        { status: 400 },
+      );
     }
 
     console.error("Verify payment error:", error);
-    return res.status(500).json({
-      error: "Failed to verify payment",
-    });
+    return NextResponse.json(
+      {
+        error: "Failed to verify payment",
+      },
+      { status: 500 },
+    );
   }
 }
