@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Trash2, Edit, Plus, X } from "lucide-react";
+import { Trash2, Edit, Plus, X, Loader2 } from "lucide-react";
 
 interface Campaign {
   id: string;
@@ -173,19 +173,21 @@ export default function AdminCampaignsPage() {
 
   if (loading && campaigns.length === 0) {
     return (
-      <div className="min-h-screen bg-[#1B2232] flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-[#1B2232] text-xl flex items-center gap-2">
+          <Loader2 /> Loading...
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen text-white p-8">
+    <div className="text-[#1B2232] p-8 min-h-screen bg-gray-50">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold mb-2">Manage Campaigns</h1>
-          <p className="text-gray-400">
+          <p className="text-gray-600">
             Create and manage fundraising campaigns
           </p>
         </div>
@@ -206,7 +208,7 @@ export default function AdminCampaignsPage() {
         {campaigns.map((campaign) => (
           <div
             key={campaign.id}
-            className="bg-[#2A3447] rounded-xl overflow-hidden hover:shadow-xl transition-shadow"
+            className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all"
           >
             <div className="relative h-48">
               <img
@@ -231,7 +233,7 @@ export default function AdminCampaignsPage() {
             </div>
             <div className="p-5">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs px-2 py-1 bg-[#FA8B46]/20 text-[#FA8B46] rounded">
+                <span className="text-xs px-2 py-1 bg-[#FA8B46]/10 text-[#FA8B46] rounded font-medium">
                   {campaign.category}
                 </span>
                 <span
@@ -249,23 +251,23 @@ export default function AdminCampaignsPage() {
               <h3 className="text-lg font-bold mb-2 line-clamp-2">
                 {campaign.title}
               </h3>
-              <p className="text-sm text-gray-400 mb-4 line-clamp-2">
+              <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                 {campaign.description}
               </p>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Raised</span>
+                  <span className="text-gray-600">Raised</span>
                   <span className="font-semibold">
                     ₹{campaign.raised.toLocaleString("en-IN")}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-400">Goal</span>
+                  <span className="text-gray-600">Goal</span>
                   <span className="font-semibold">
                     ₹{campaign.goal.toLocaleString("en-IN")}
                   </span>
                 </div>
-                <div className="w-full bg-gray-700 rounded-full h-2">
+                <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
                     className="bg-[#FA8B46] h-2 rounded-full transition-all"
                     style={{
@@ -273,7 +275,7 @@ export default function AdminCampaignsPage() {
                     }}
                   />
                 </div>
-                <div className="text-xs text-gray-400 text-right">
+                <div className="text-xs text-gray-600 text-right">
                   {((campaign.raised / campaign.goal) * 100).toFixed(1)}% funded
                 </div>
               </div>
@@ -284,7 +286,7 @@ export default function AdminCampaignsPage() {
 
       {campaigns.length === 0 && (
         <div className="text-center py-16">
-          <p className="text-gray-400 text-lg mb-4">No campaigns yet</p>
+          <p className="text-gray-600 text-lg mb-4">No campaigns yet</p>
           <button
             onClick={() => setShowModal(true)}
             className="bg-[#FA8B46] hover:bg-[#FA8B46]/90 px-6 py-3 rounded-lg font-semibold transition-colors"
@@ -297,8 +299,8 @@ export default function AdminCampaignsPage() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-[#2A3447] rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-[#2A3447] px-6 py-4 border-b border-gray-700 flex justify-between items-center">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-gray-200">
+            <div className="sticky top-0 bg-white px-6 py-4 border-b border-gray-200 flex justify-between items-center">
               <h2 className="text-2xl font-bold">
                 {editingCampaign ? "Edit Campaign" : "Create New Campaign"}
               </h2>
@@ -322,7 +324,7 @@ export default function AdminCampaignsPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
                   placeholder="e.g., Education for Underprivileged Children"
                 />
               </div>
@@ -338,7 +340,7 @@ export default function AdminCampaignsPage() {
                     setFormData({ ...formData, description: e.target.value })
                   }
                   rows={4}
-                  className="w-full px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all resize-none"
                   placeholder="Describe your campaign and its impact..."
                 />
               </div>
@@ -357,7 +359,7 @@ export default function AdminCampaignsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, goal: e.target.value })
                     }
-                    className="w-full px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
                     placeholder="50000"
                   />
                 </div>
@@ -372,7 +374,7 @@ export default function AdminCampaignsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, category: e.target.value })
                     }
-                    className="w-full px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
                   >
                     <option value="education">Education</option>
                     <option value="health">Health</option>
@@ -395,7 +397,7 @@ export default function AdminCampaignsPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, image: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+                  className="w-full px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
                   placeholder="https://example.com/image.jpg"
                 />
               </div>
@@ -411,7 +413,7 @@ export default function AdminCampaignsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, endDate: e.target.value })
                     }
-                    className="w-full px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
                   />
                 </div>
 
@@ -425,7 +427,7 @@ export default function AdminCampaignsPage() {
                     onChange={(e) =>
                       setFormData({ ...formData, status: e.target.value })
                     }
-                    className="w-full px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+                    className="w-full px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
                   >
                     <option value="active">Active</option>
                     <option value="paused">Paused</option>

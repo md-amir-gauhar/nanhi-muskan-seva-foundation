@@ -50,9 +50,9 @@ export default function AdminLayout({
   ];
 
   return (
-    <div className="min-h-screen bg-[#1B2232]">
+    <div className="min-h-screen bg-[#FFF5EE]">
       {/* Top Bar */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-[#2A3447] border-b border-gray-700 z-50">
+      <div className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200 z-50 shadow-sm">
         <div className="h-full px-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
@@ -60,9 +60,9 @@ export default function AdminLayout({
               className="lg:hidden p-2 hover:bg-gray-700 rounded-lg transition-colors"
             >
               {sidebarOpen ? (
-                <X className="w-5 h-5 text-white" />
+                <X className="w-5 h-5 text-[#1B2232]" />
               ) : (
-                <Menu className="w-5 h-5 text-white" />
+                <Menu className="w-5 h-5 text-[#1B2232]" />
               )}
             </button>
             <div className="flex items-center gap-3">
@@ -93,7 +93,7 @@ export default function AdminLayout({
 
       {/* Sidebar */}
       <div
-        className={`fixed left-0 top-16 bottom-0 w-64 bg-[#2A3447] border-r border-gray-700 z-40 transition-transform duration-300 ${
+        className={`fixed left-0 top-16 bottom-0 w-64 bg-white border-r border-gray-200 z-40 transition-transform duration-300 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
@@ -109,7 +109,7 @@ export default function AdminLayout({
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                   isActive
                     ? "bg-[#FA8B46] text-white"
-                    : "text-gray-400 hover:bg-gray-700 hover:text-white"
+                    : "text-gray-700 hover:bg-[#FFF5EE] hover:text-[#FA8B46]"
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -129,7 +129,7 @@ export default function AdminLayout({
       )}
 
       {/* Main Content */}
-      <div className="pt-16 lg:pl-64">
+      <div className="pt-16 lg:pl-64 bg-gray-50 min-h-screen">
         <main>{children}</main>
       </div>
     </div>

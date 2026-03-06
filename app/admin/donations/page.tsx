@@ -6,7 +6,6 @@ import {
   IndianRupee,
   Search,
   Filter,
-  Download,
   CheckCircle,
   XCircle,
   Clock,
@@ -14,6 +13,7 @@ import {
   Phone,
   Calendar,
   DollarSign,
+  Loader2,
 } from "lucide-react";
 
 interface Donation {
@@ -118,25 +118,27 @@ export default function AdminDonationsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1B2232] flex items-center justify-center">
-        <div className="text-white text-xl">Loading donations...</div>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-[#1B2232] text-xl flex items-center gap-4 ">
+          <Loader2 /> Loading{" "}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen text-white p-8">
+    <div className="text-[#1B2232] p-8 min-h-screen bg-gray-50">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Donations</h1>
-        <p className="text-gray-400">View and manage all donations</p>
+        <p className="text-gray-600">View and manage all donations</p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-[#2A3447] rounded-xl p-5">
+        <div className="bg-white rounded-xl p-5 shadow-md">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Total Donations</span>
+            <span className="text-gray-600 text-sm">Total Donations</span>
             <IndianRupee className="w-5 h-5 text-[#FA8B46]" />
           </div>
           <div className="text-2xl font-bold">
@@ -144,28 +146,28 @@ export default function AdminDonationsPage() {
           </div>
         </div>
 
-        <div className="bg-[#2A3447] rounded-xl p-5">
+        <div className="bg-white rounded-xl p-5 shadow-md">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Total Count</span>
-            <CheckCircle className="w-5 h-5 text-green-400" />
+            <span className="text-gray-600 text-sm">Total Count</span>
+            <CheckCircle className="w-5 h-5 text-green-500" />
           </div>
           <div className="text-2xl font-bold">{filteredDonations.length}</div>
         </div>
 
-        <div className="bg-[#2A3447] rounded-xl p-5">
+        <div className="bg-white rounded-xl p-5 shadow-md">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Successful</span>
-            <CheckCircle className="w-5 h-5 text-green-400" />
+            <span className="text-gray-600 text-sm">Successful</span>
+            <CheckCircle className="w-5 h-5 text-green-500" />
           </div>
           <div className="text-2xl font-bold">
             {donations.filter((d) => d.status === "success").length}
           </div>
         </div>
 
-        <div className="bg-[#2A3447] rounded-xl p-5">
+        <div className="bg-white rounded-xl p-5 shadow-md">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-400 text-sm">Pending/Failed</span>
-            <Clock className="w-5 h-5 text-yellow-400" />
+            <span className="text-gray-600 text-sm">Pending/Failed</span>
+            <Clock className="w-5 h-5 text-yellow-500" />
           </div>
           <div className="text-2xl font-bold">
             {donations.filter((d) => d.status !== "success").length}
@@ -174,25 +176,25 @@ export default function AdminDonationsPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-[#2A3447] rounded-xl p-4 mb-6">
+      <div className="bg-white rounded-xl p-4 mb-6 border border-gray-200">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
             <input
               type="text"
               placeholder="Search by name, email, or order ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+              className="w-full pl-10 pr-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-gray-400" />
+            <Filter className="w-5 h-5 text-gray-500" />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="px-4 py-3 bg-[#1B2232] border border-gray-700 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
+              className="px-4 py-3 bg-[#FFF5EE] border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FA8B46] focus:border-transparent outline-none transition-all"
             >
               <option value="all">All Status</option>
               <option value="success">Success</option>
@@ -204,12 +206,12 @@ export default function AdminDonationsPage() {
       </div>
 
       {/* Donations Table */}
-      <div className="bg-[#2A3447] rounded-xl overflow-hidden">
+      <div className="bg-white rounded-xl overflow-hidden border border-gray-200">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-[#1B2232]">
+            <thead className="bg-[#FFF5EE]">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                   Donor
                 </th>
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-400">
@@ -229,7 +231,7 @@ export default function AdminDonationsPage() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-700">
+            <tbody className="divide-y divide-gray-200">
               {filteredDonations.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center">
@@ -261,11 +263,11 @@ export default function AdminDonationsPage() {
                         </span>
                         {!donation.isAnonymous && (
                           <>
-                            <div className="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                            <div className="flex items-center gap-1 text-xs text-gray-600 mt-1">
                               <Mail className="w-3 h-3" />
                               {donation.donorEmail}
                             </div>
-                            <div className="flex items-center gap-1 text-xs text-gray-400">
+                            <div className="flex items-center gap-1 text-xs text-gray-600">
                               <Phone className="w-3 h-3" />
                               {donation.donorPhone}
                             </div>
@@ -294,7 +296,7 @@ export default function AdminDonationsPage() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-1 text-sm text-gray-400">
+                      <div className="flex items-center gap-1 text-sm text-gray-600">
                         <Calendar className="w-4 h-4" />
                         {new Date(donation.createdAt).toLocaleDateString(
                           "en-IN",
