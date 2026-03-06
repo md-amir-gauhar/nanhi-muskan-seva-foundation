@@ -5,6 +5,7 @@ import MottoSection from "@/components/MottoSection";
 import VideoCarousel from "@/components/VideoCarousel";
 import ImageCarousel from "@/components/ImageCarousel";
 import Gallery from "@/components/Gallery";
+import CampaignsSection from "@/components/CampaignsSection";
 import MapSection from "@/components/MapSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
         <VideoCarousel />
         <ImageCarousel />
         <Gallery />
+        <CampaignsSection />
         <MapSection />
         <ContactSection />
       </main>
