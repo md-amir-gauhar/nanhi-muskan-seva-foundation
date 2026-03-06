@@ -79,12 +79,13 @@ const CampaignsSection = () => {
   return (
     <section
       ref={ref}
-      className="py-16 md:py-20 bg-gradient-to-b from-background to-[#FFF5EE] relative overflow-hidden"
+      className="py-20 md:py-28 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden"
       id="campaigns"
     >
-      {/* Decorative background */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#FA8B46]/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FA8B46]/5 rounded-full blur-3xl" />
+      {/* Elegant gradient orbs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/8 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-secondary/6 to-transparent rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-primary/3 to-transparent rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
@@ -92,30 +93,34 @@ const CampaignsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <span className="text-[#FA8B46] font-body font-semibold text-sm uppercase tracking-wider inline-flex items-center gap-2 mb-3">
+          <span className="text-primary font-body font-semibold text-sm uppercase tracking-wider inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-primary/5 backdrop-blur-sm">
             <Heart className="w-4 h-4" />
             Our Campaigns
           </span>
-          <h2 className="font-display font-black text-3xl md:text-5xl text-foreground mb-4">
-            Make a <span className="text-[#FA8B46]">Difference</span> Today
+          <h2 className="font-display font-black text-4xl md:text-5xl lg:text-6xl text-foreground mb-5">
+            Make a{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-secondary">
+              Difference
+            </span>{" "}
+            Today
           </h2>
-          <p className="font-body text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="font-body text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
             Join us in our mission to create positive change. Every contribution
             brings us closer to our goals.
           </p>
         </motion.div>
 
         {/* Campaigns Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {campaigns.map((campaign, index) => (
             <motion.div
               key={campaign.id}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100 flex flex-col"
+              className="bg-gradient-to-br from-white/95 to-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-card hover:shadow-elevated transition-all duration-500 group border border-border/50 flex flex-col hover:-translate-y-1"
             >
               {/* Image */}
               <div className="relative h-56 overflow-hidden flex-shrink-0">
@@ -123,12 +128,13 @@ const CampaignsSection = () => {
                   src={campaign.image}
                   alt={campaign.title}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute top-4 left-4">
                   <span
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold backdrop-blur-sm bg-white/90 ${getCategoryColor(campaign.category)}`}
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold backdrop-blur-md bg-white/95 shadow-soft border border-white/50 ${getCategoryColor(campaign.category)}`}
                   >
                     {campaign.category.charAt(0).toUpperCase() +
                       campaign.category.slice(1)}
@@ -137,33 +143,33 @@ const CampaignsSection = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="font-display font-bold text-xl mb-3 text-foreground line-clamp-2 group-hover:text-[#FA8B46] transition-colors min-h-[3.5rem]">
+              <div className="p-7 flex flex-col flex-grow">
+                <h3 className="font-display font-bold text-xl mb-3 text-foreground line-clamp-2 group-hover:text-primary transition-colors duration-300 min-h-[3.5rem]">
                   {campaign.title}
                 </h3>
-                <p className="font-body text-muted-foreground text-sm mb-5 line-clamp-3 min-h-[4rem]">
+                <p className="font-body text-muted-foreground text-sm mb-6 line-clamp-3 min-h-[4rem] leading-relaxed">
                   {campaign.description}
                 </p>
 
                 {/* Progress */}
-                <div className="space-y-3 mb-5 mt-auto">
+                <div className="space-y-3 mb-6 mt-auto">
                   <div className="flex justify-between items-center text-sm">
                     <div className="flex items-center gap-1.5">
-                      <TrendingUp className="w-4 h-4 text-[#FA8B46]" />
+                      <TrendingUp className="w-4 h-4 text-primary" />
                       <span className="font-semibold text-foreground">
                         ₹{campaign.raised.toLocaleString("en-IN")}
                       </span>
                       <span className="text-muted-foreground">raised</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Target className="w-4 h-4 text-gray-500" />
-                      <span className="font-semibold text-gray-700">
+                      <Target className="w-4 h-4 text-muted-foreground" />
+                      <span className="font-semibold text-foreground">
                         ₹{campaign.goal.toLocaleString("en-IN")}
                       </span>
                     </div>
                   </div>
 
-                  <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                  <div className="w-full bg-muted rounded-full h-3 overflow-hidden shadow-inner">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={
@@ -173,18 +179,22 @@ const CampaignsSection = () => {
                             }
                           : {}
                       }
-                      transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
-                      className="bg-gradient-to-r from-[#FA8B46] to-[#ff9d5c] h-full rounded-full"
+                      transition={{
+                        duration: 1.2,
+                        delay: index * 0.1 + 0.3,
+                        ease: "easeOut",
+                      }}
+                      className="bg-gradient-to-r from-primary via-primary/90 to-secondary h-full rounded-full shadow-soft"
                     />
                   </div>
 
                   <div className="flex justify-between items-center text-xs">
-                    <span className="text-[#FA8B46] font-semibold">
+                    <span className="text-primary font-bold">
                       {((campaign.raised / campaign.goal) * 100).toFixed(1)}%
                       funded
                     </span>
                     {campaign.donorCount !== undefined && (
-                      <span className="text-muted-foreground">
+                      <span className="text-muted-foreground font-medium">
                         {campaign.donorCount}{" "}
                         {campaign.donorCount === 1 ? "donor" : "donors"}
                       </span>
@@ -195,10 +205,10 @@ const CampaignsSection = () => {
                 {/* CTA */}
                 <Link
                   href={`/donate?campaign=${campaign.id}`}
-                  className="flex items-center justify-center gap-2 w-full bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white py-3 rounded-xl font-display font-bold transition-all duration-300 hover:shadow-lg group-hover:scale-[1.02]"
+                  className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-white py-3.5 rounded-xl font-display font-bold transition-all duration-300 shadow-soft hover:shadow-card group-hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Donate Now
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </div>
             </motion.div>
@@ -215,7 +225,7 @@ const CampaignsSection = () => {
           >
             <Link
               href="/campaigns"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-[#FFF5EE] border-2 border-[#FA8B46] text-[#FA8B46] rounded-xl font-display font-bold transition-all duration-300 hover:shadow-lg hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-sm hover:from-primary/5 hover:to-primary/10 border-2 border-primary/30 text-primary rounded-2xl font-display font-bold transition-all duration-300 shadow-card hover:shadow-elevated hover:scale-105 hover:border-primary/50 active:scale-95"
             >
               View All Campaigns
               <ArrowRight className="w-5 h-5" />

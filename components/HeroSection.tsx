@@ -10,7 +10,7 @@ import { FloatingButterfly, FloatingFlower } from "./DecorativeSVGs";
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28">
-      {/* Background Image with Overlay */}
+      {/* Background with elegant gradient overlay */}
       <div className="absolute inset-0">
         <Image
           src={heroImage}
@@ -20,13 +20,13 @@ const HeroSection = () => {
           priority
           quality={90}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/60 via-foreground/40 to-foreground/80" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-32 left-10 w-20 h-20 rounded-full bg-primary/20 blur-xl animate-float" />
-      <div className="absolute bottom-40 right-20 w-32 h-32 rounded-full bg-secondary/20 blur-xl animate-float-delayed" />
-      <div className="absolute top-1/2 left-1/4 w-16 h-16 rounded-full bg-highlight/20 blur-xl animate-pulse-soft" />
+      {/* Subtle floating orbs */}
+      <div className="absolute top-32 left-10 w-32 h-32 rounded-full bg-primary/10 blur-3xl animate-float" />
+      <div className="absolute bottom-40 right-20 w-40 h-40 rounded-full bg-secondary/10 blur-3xl animate-float-delayed" />
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 rounded-full bg-highlight/10 blur-3xl animate-pulse-soft" />
 
       {/* Floating SVG decorations */}
       <FloatingButterfly
@@ -61,7 +61,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-[#FA8B46] backdrop-blur-sm rounded-full px-5 py-2 mb-8 shadow-lg"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/95 to-primary backdrop-blur-md rounded-full px-6 py-2.5 mb-8 shadow-elevated border border-white/20"
           >
             <Heart className="w-4 h-4 text-white" fill="currentColor" />
             <span className="text-white font-body text-sm font-semibold">
@@ -70,9 +70,9 @@ const HeroSection = () => {
           </motion.div>
 
           {/* Main Heading */}
-          <h1 className="font-display font-black text-4xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight drop-shadow-lg">
+          <h1 className="font-display font-black text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight drop-shadow-2xl">
             Together, We Create{" "}
-            <span className="text-[#FA8B46] drop-shadow-xl">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-highlight drop-shadow-2xl">
               Hope and Impact
             </span>
           </h1>
@@ -92,8 +92,11 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <a href="/donate-us">
-              <Button className="bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white px-8 py-6 rounded-full font-display font-bold text-base shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95">
+            <a href="/donate">
+              <Button
+                size="lg"
+                className="px-8 py-6 rounded-full font-display font-bold text-base shadow-elevated hover:shadow-elevated"
+              >
                 <Heart className="w-5 h-5 mr-2" fill="currentColor" />
                 Donate Now
               </Button>
@@ -101,7 +104,8 @@ const HeroSection = () => {
             <a href="#programs">
               <Button
                 variant="outline"
-                className="bg-transparent border-2 border-white/60 text-white hover:bg-white hover:text-gray-900 px-8 py-6 rounded-full font-display font-bold text-base transition-all duration-200 ease-out hover:scale-105 active:scale-95"
+                size="lg"
+                className="bg-white/10 border-white/30 backdrop-blur-md text-white hover:bg-white hover:text-foreground px-8 py-6 rounded-full font-display font-bold text-base shadow-card hover:shadow-elevated"
               >
                 Learn More
               </Button>
@@ -120,11 +124,11 @@ const HeroSection = () => {
               { number: "5+", label: "Programs" },
               { number: "100+", label: "Volunteers" },
             ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="font-display font-black text-4xl md:text-5xl text-[#FA8B46] drop-shadow-lg">
+              <div key={index} className="text-center group">
+                <div className="font-display font-black text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-br from-primary via-primary/90 to-highlight drop-shadow-2xl group-hover:scale-110 transition-transform duration-300">
                   {stat.number}
                 </div>
-                <div className="font-body text-sm md:text-base text-white/80 mt-2">
+                <div className="font-body text-sm md:text-base text-white/90 mt-2 font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -132,7 +136,7 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator - Hidden on mobile */}
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -142,7 +146,7 @@ const HeroSection = () => {
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors"
+            className="w-12 h-12 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center cursor-pointer hover:bg-white/25 hover:scale-110 transition-all duration-300 shadow-card"
           >
             <ArrowDown className="w-5 h-5 text-white" />
           </motion.div>

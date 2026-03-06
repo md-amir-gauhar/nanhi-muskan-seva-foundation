@@ -222,30 +222,37 @@ const DonatePage = () => {
 
   if (loadingCampaign) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FFF5EE]">
-        <div className="inline-block w-8 h-8 border-4 border-[#FA8B46] border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted/20 to-background">
+        <div className="inline-block w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin shadow-soft"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFF5EE] to-white py-16 px-4">
-      <div className="container mx-auto max-w-6xl">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background relative overflow-hidden py-20 px-4">
+      {/* Elegant gradient orbs */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/6 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-secondary/5 to-transparent rounded-full blur-3xl" />
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           {/* Header */}
-          <div className="text-center mb-12">
-            <span className="text-[#FA8B46] font-body font-semibold text-sm uppercase tracking-wider inline-flex items-center gap-2 mb-3">
+          <div className="text-center mb-16">
+            <span className="text-primary font-body font-semibold text-sm uppercase tracking-wider inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full bg-primary/5 backdrop-blur-sm">
               <Heart className="w-4 h-4" />
               Make a Donation
             </span>
-            <h1 className="font-display font-black text-4xl md:text-5xl text-foreground mb-4">
-              Support Our <span className="text-[#FA8B46]">Mission</span>
+            <h1 className="font-display font-black text-4xl md:text-5xl lg:text-6xl text-foreground mb-5">
+              Support Our{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-secondary">
+                Mission
+              </span>
             </h1>
-            <p className="font-body text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="font-body text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
               Your generosity brings hope and smiles to children in need
             </p>
           </div>
@@ -257,9 +264,9 @@ const DonatePage = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100"
+                className="bg-gradient-to-br from-white/95 to-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-card border border-border/50"
               >
-                <div className="relative h-64">
+                <div className="relative h-72">
                   <Image
                     src={campaign.image}
                     alt={campaign.title}
@@ -267,19 +274,20 @@ const DonatePage = () => {
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1.5 rounded-full text-xs font-bold backdrop-blur-sm bg-white/90 text-[#FA8B46]">
+                    <span className="px-3 py-1.5 rounded-full text-xs font-bold backdrop-blur-md bg-white/95 text-primary shadow-soft border border-white/50">
                       {campaign.category.charAt(0).toUpperCase() +
                         campaign.category.slice(1)}
                     </span>
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-7">
                   <h2 className="font-display font-bold text-2xl mb-3 text-foreground">
                     {campaign.title}
                   </h2>
-                  <p className="font-body text-muted-foreground mb-6">
+                  <p className="font-body text-muted-foreground mb-7 leading-relaxed">
                     {campaign.description}
                   </p>
 
@@ -287,23 +295,23 @@ const DonatePage = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center text-sm">
                       <div className="flex items-center gap-1.5">
-                        <TrendingUp className="w-4 h-4 text-[#FA8B46]" />
+                        <TrendingUp className="w-4 h-4 text-primary" />
                         <span className="font-semibold text-foreground">
                           ₹{campaign.raised.toLocaleString("en-IN")}
                         </span>
                         <span className="text-muted-foreground">raised</span>
                       </div>
                       <div className="flex items-center gap-1.5">
-                        <Target className="w-4 h-4 text-gray-500" />
-                        <span className="font-semibold text-gray-700">
+                        <Target className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-semibold text-foreground">
                           ₹{campaign.goal.toLocaleString("en-IN")}
                         </span>
                       </div>
                     </div>
 
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                    <div className="w-full bg-muted rounded-full h-3 overflow-hidden shadow-inner">
                       <div
-                        className="bg-gradient-to-r from-[#FA8B46] to-[#ff9d5c] h-full rounded-full transition-all duration-1000"
+                        className="bg-gradient-to-r from-primary via-primary/90 to-secondary h-full rounded-full transition-all duration-1000 shadow-soft"
                         style={{
                           width: `${Math.min((campaign.raised / campaign.goal) * 100, 100)}%`,
                         }}
@@ -311,7 +319,7 @@ const DonatePage = () => {
                     </div>
 
                     <div className="text-center">
-                      <span className="text-[#FA8B46] font-semibold text-sm">
+                      <span className="text-primary font-bold text-sm">
                         {((campaign.raised / campaign.goal) * 100).toFixed(1)}%
                         funded
                       </span>
@@ -326,13 +334,13 @@ const DonatePage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className={`bg-white rounded-2xl shadow-lg border border-gray-100 p-8 ${!campaign ? "lg:col-span-2 max-w-2xl mx-auto" : ""}`}
+              className={`bg-gradient-to-br from-white/95 to-white/80 backdrop-blur-sm rounded-3xl shadow-card border border-border/50 p-8 md:p-10 ${!campaign ? "lg:col-span-2 max-w-2xl mx-auto" : ""}`}
             >
-              <form onSubmit={handlePayment} className="space-y-6">
+              <form onSubmit={handlePayment} className="space-y-7">
                 {/* Amount Selection */}
                 <div>
-                  <label className="flex items-center gap-2 font-display font-bold text-lg mb-4">
-                    <IndianRupee className="w-5 h-5 text-[#FA8B46]" />
+                  <label className="flex items-center gap-2 font-display font-bold text-xl mb-5">
+                    <IndianRupee className="w-5 h-5 text-primary" />
                     Select Amount
                   </label>
                   <div className="grid grid-cols-3 gap-3 mb-4">
@@ -341,10 +349,10 @@ const DonatePage = () => {
                         key={value}
                         type="button"
                         onClick={() => handleAmountSelect(value)}
-                        className={`py-3 px-4 rounded-xl font-body font-semibold transition-all duration-300 ${
+                        className={`py-3.5 px-4 rounded-xl font-body font-bold transition-all duration-300 ${
                           amount === value.toString()
-                            ? "bg-[#FA8B46] text-white shadow-lg scale-105"
-                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                            ? "bg-gradient-to-br from-primary to-primary/90 text-white shadow-card scale-105"
+                            : "bg-muted/80 text-foreground hover:bg-muted hover:shadow-soft hover:scale-102"
                         }`}
                       >
                         ₹{value.toLocaleString("en-IN")}
@@ -362,14 +370,14 @@ const DonatePage = () => {
                 </div>
 
                 {/* Donor Details */}
-                <div className="space-y-4">
-                  <h3 className="font-display font-bold text-lg">
+                <div className="space-y-5">
+                  <h3 className="font-display font-bold text-xl">
                     Your Details
                   </h3>
 
                   <div>
-                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2">
-                      <User className="w-4 h-4 text-[#FA8B46]" />
+                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2.5">
+                      <User className="w-4 h-4 text-primary" />
                       Full Name *
                     </label>
                     <Input
@@ -384,8 +392,8 @@ const DonatePage = () => {
                   </div>
 
                   <div>
-                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2">
-                      <Mail className="w-4 h-4 text-[#FA8B46]" />
+                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2.5">
+                      <Mail className="w-4 h-4 text-primary" />
                       Email Address *
                     </label>
                     <Input
@@ -399,8 +407,8 @@ const DonatePage = () => {
                   </div>
 
                   <div>
-                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2">
-                      <Phone className="w-4 h-4 text-[#FA8B46]" />
+                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2.5">
+                      <Phone className="w-4 h-4 text-primary" />
                       Phone Number *
                     </label>
                     <Input
@@ -414,8 +422,8 @@ const DonatePage = () => {
                   </div>
 
                   <div>
-                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2">
-                      <CreditCard className="w-4 h-4 text-[#FA8B46]" />
+                    <label className="flex items-center gap-2 font-body text-sm font-semibold mb-2.5">
+                      <CreditCard className="w-4 h-4 text-primary" />
                       PAN Number (Optional)
                     </label>
                     <Input
@@ -433,7 +441,7 @@ const DonatePage = () => {
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-3 pt-2">
                     <input
                       type="checkbox"
                       id="anonymous"
@@ -446,11 +454,11 @@ const DonatePage = () => {
                           setDonorName("");
                         }
                       }}
-                      className="w-4 h-4 text-[#FA8B46] rounded focus:ring-[#FA8B46]"
+                      className="w-5 h-5 text-primary rounded border-2 border-border focus:ring-2 focus:ring-primary/30 cursor-pointer transition-all"
                     />
                     <label
                       htmlFor="anonymous"
-                      className="font-body text-sm text-gray-700"
+                      className="font-body text-sm text-foreground font-medium cursor-pointer"
                     >
                       Make this donation anonymous
                     </label>
@@ -460,8 +468,9 @@ const DonatePage = () => {
                 {/* Submit Button */}
                 <Button
                   type="submit"
+                  size="lg"
                   disabled={loading || !getSelectedAmount()}
-                  className="w-full bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white py-6 rounded-xl font-display font-bold text-lg transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full py-7 rounded-xl font-display font-bold text-lg shadow-card hover:shadow-elevated"
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
@@ -470,7 +479,7 @@ const DonatePage = () => {
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      <Heart className="w-5 h-5" />
+                      <Heart className="w-5 h-5" fill="currentColor" />
                       Donate{" "}
                       {getSelectedAmount()
                         ? `₹${getSelectedAmount().toLocaleString("en-IN")}`
@@ -479,7 +488,7 @@ const DonatePage = () => {
                   )}
                 </Button>
 
-                <p className="text-xs text-center text-muted-foreground">
+                <p className="text-xs text-center text-muted-foreground leading-relaxed">
                   Your donation is secure and encrypted. You will receive a
                   receipt via email.
                 </p>
@@ -492,20 +501,26 @@ const DonatePage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 text-center"
+            className="mt-16 text-center"
           >
-            <div className="inline-flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full" />
-                <span>Secure Payment</span>
+            <div className="inline-flex flex-wrap items-center justify-center gap-8 px-8 py-5 rounded-2xl bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm border border-border/50 shadow-card">
+              <div className="flex items-center gap-2.5">
+                <div className="w-2.5 h-2.5 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-soft" />
+                <span className="font-body text-sm font-medium text-foreground">
+                  Secure Payment
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full" />
-                <span>80G Tax Benefit</span>
+              <div className="flex items-center gap-2.5">
+                <div className="w-2.5 h-2.5 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-soft" />
+                <span className="font-body text-sm font-medium text-foreground">
+                  80G Tax Benefit
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full" />
-                <span>Email Receipt</span>
+              <div className="flex items-center gap-2.5">
+                <div className="w-2.5 h-2.5 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-soft" />
+                <span className="font-body text-sm font-medium text-foreground">
+                  Email Receipt
+                </span>
               </div>
             </div>
           </motion.div>
