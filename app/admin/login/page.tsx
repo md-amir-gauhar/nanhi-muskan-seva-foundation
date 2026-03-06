@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Loader2, Lock, Mail, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-primary/5 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFF5EE] via-background to-[#FFF5EE] flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -49,14 +50,20 @@ export default function AdminLogin() {
       >
         <div className="bg-background rounded-2xl shadow-xl p-8 border border-border">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-              <Heart className="w-8 h-8 text-primary" fill="currentColor" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-[#FA8B46]/10 rounded-full mb-4 overflow-hidden">
+              <Image
+                src={"/logo.jpg"}
+                alt="logo"
+                width={64}
+                height={64}
+                className="object-cover"
+              />
             </div>
             <h1 className="font-display font-bold text-2xl text-foreground mb-2">
               Admin Portal
             </h1>
             <p className="text-muted-foreground text-sm">
-              Nanhi Muskan Foundation
+              Nanhi Muskan Seva Foundation
             </p>
           </div>
 
@@ -73,7 +80,7 @@ export default function AdminLogin() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@example.com"
-                  className="pl-10"
+                  className="pl-10 focus:ring-[#FA8B46] focus:border-[#FA8B46]"
                   required
                   disabled={loading}
                 />
@@ -95,7 +102,7 @@ export default function AdminLogin() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="pl-10"
+                  className="pl-10 focus:ring-[#FA8B46] focus:border-[#FA8B46]"
                   required
                   disabled={loading}
                 />
@@ -106,13 +113,17 @@ export default function AdminLogin() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-destructive/10 text-destructive text-sm p-3 rounded-lg"
+                className="bg-red-50 text-red-600 text-sm p-3 rounded-lg border border-red-200"
               >
                 {error}
               </motion.div>
             )}
 
-            <Button type="submit" disabled={loading} className="w-full">
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white"
+            >
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
