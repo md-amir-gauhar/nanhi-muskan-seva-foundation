@@ -212,7 +212,7 @@ const AboutPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/donate-us"
+                href="/#campaigns"
                 className="inline-block bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white px-8 py-4 rounded-full font-display font-bold text-base shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
               >
                 Support Our Cause

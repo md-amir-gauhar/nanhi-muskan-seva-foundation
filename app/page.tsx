@@ -19,7 +19,6 @@ export default function Home() {
         <HeroSection />
         <MottoSection />
         <VideoCarousel />
-        <ImageCarousel />
         <Gallery />
         <CampaignsSection />
         <MapSection />

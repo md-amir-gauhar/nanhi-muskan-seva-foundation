@@ -118,7 +118,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <Link href="/donate-us">
+            <Link href="/#campaigns">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
@@ -202,7 +202,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.3 }}
               >
-                <Link href="/donate-us" onClick={() => setIsMenuOpen(false)}>
+                <Link href="/#campaigns" onClick={() => setIsMenuOpen(false)}>
                   <Button className="bg-primary text-primary-foreground w-full mt-3 rounded-full font-display font-bold text-sm py-2.5">
                     <Heart className="w-3.5 h-3.5 mr-1.5" fill="currentColor" />
                     Donate Now

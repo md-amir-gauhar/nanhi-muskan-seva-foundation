@@ -92,7 +92,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
-            <a href="/donate-us">
+            <a href="#campaigns">
               <Button className="bg-[#FA8B46] hover:bg-[#FA8B46]/90 text-white px-8 py-6 rounded-full font-display font-bold text-base shadow-lg hover:shadow-xl transition-all duration-200 ease-out hover:scale-105 active:scale-95">
                 <Heart className="w-5 h-5 mr-2" fill="currentColor" />
                 Donate Now

@@ -70,7 +70,7 @@ const ImageCarousel = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-body font-semibold text-sm uppercase tracking-wider">
+          <span className="text-primary font-body font-semibold text-xl uppercase tracking-wider">
             Our Programs
           </span>
           <h2 className="font-display font-black text-3xl md:text-5xl text-foreground mt-3 mb-4">
@@ -87,32 +87,34 @@ const ImageCarousel = () => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative max-w-5xl mx-auto"
+          className="relative max-w-2xl mx-auto"
         >
-          <div className="relative aspect-[16/9] rounded-4xl overflow-hidden shadow-elevated">
+          <div className="relative rounded-2xl overflow-hidden shadow-elevated bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
             {images.map((image, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: index === currentIndex ? 1 : 0 }}
                 transition={{ duration: 0.5 }}
-                className={`absolute inset-0 ${index === currentIndex ? "z-10" : "z-0"}`}
+                className={`relative ${index === currentIndex ? "z-10" : "z-0"}`}
               >
-                <Image
-                  src={image.src}
-                  alt={image.title}
-                  fill
-                  className="object-cover"
-                  quality={75}
-                  priority={index === 0}
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-foreground/70 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="font-display font-bold text-2xl md:text-3xl text-background mb-2">
+                <div className="relative w-full aspect-[3/4]">
+                  <Image
+                    src={image.src}
+                    alt={image.title}
+                    fill
+                    className="object-cover"
+                    quality={85}
+                    priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, 768px"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <h3 className="font-display font-bold text-xl md:text-3xl text-white mb-2 drop-shadow-lg">
                     {image.title}
                   </h3>
-                  <p className="font-body text-background/80">
+                  <p className="font-body text-white/95 drop-shadow-md">
                     {image.description}
                   </p>
                 </div>
@@ -142,7 +144,7 @@ const ImageCarousel = () => {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`relative flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden transition-all duration-300 ${
+                className={`relative shrink-0 w-20 h-20 rounded-xl overflow-hidden transition-all duration-300 ${
                   index === currentIndex
                     ? "ring-4 ring-primary scale-105"
                     : "opacity-60 hover:opacity-100"
