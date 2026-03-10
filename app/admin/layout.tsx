@@ -22,6 +22,11 @@ export default function AdminLayout({
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // Don't show layout for login page
+  if (pathname === "/admin/login") {
+    return <>{children}</>;
+  }
+
   const handleLogout = async () => {
     try {
       await fetch("/api/admin/logout", { method: "POST" });
