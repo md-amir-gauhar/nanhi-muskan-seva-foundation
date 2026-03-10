@@ -32,9 +32,12 @@ const createOrderSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     // Validate environment variables
-    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+    if (
+      !process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
+      !process.env.RAZORPAY_KEY_SECRET
+    ) {
       console.error("Razorpay credentials missing:", {
-        hasKeyId: !!process.env.RAZORPAY_KEY_ID,
+        hasKeyId: !!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
         hasKeySecret: !!process.env.RAZORPAY_KEY_SECRET,
       });
       return NextResponse.json(
