@@ -11,7 +11,7 @@ interface Campaign {
   description: string;
   goal: number;
   raised: number;
-  image: string;
+  image?: string;
   category: string;
   status: string;
   endDate: string | null;
@@ -22,7 +22,7 @@ interface CampaignFormData {
   title: string;
   description: string;
   goal: string;
-  category: string;
+  category?: string;
   image: string;
   endDate: string;
   status: string;
@@ -144,7 +144,7 @@ export default function AdminCampaignsPage() {
       description: campaign.description,
       goal: campaign.goal.toString(),
       category: campaign.category,
-      image: campaign.image,
+      image: campaign.image as string,
       endDate: campaign.endDate
         ? new Date(campaign.endDate).toISOString().split("T")[0]
         : "",
@@ -210,11 +210,11 @@ export default function AdminCampaignsPage() {
             key={campaign.id}
             className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all"
           >
-            <div className="relative h-48">
+            <div className="relative h-48 bg-[#FEFBF2]">
               <img
                 src={campaign.image || "/logo.jpg"}
                 alt={campaign.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
               <div className="absolute top-3 right-3 flex gap-2">
                 <button
@@ -388,11 +388,10 @@ export default function AdminCampaignsPage() {
 
               <div>
                 <label className="block text-sm font-semibold mb-2">
-                  Image URL *
+                  Image URL (optional)
                 </label>
                 <input
                   type="url"
-                  required
                   value={formData.image}
                   onChange={(e) =>
                     setFormData({ ...formData, image: e.target.value })
@@ -440,14 +439,14 @@ export default function AdminCampaignsPage() {
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="flex-1 px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-colors"
+                  className="flex-1 px-6 py-3 bg-gray-700 hover:bg-gray-600 text-[#FA8B46] rounded-lg font-semibold transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 px-6 py-3 bg-[#FA8B46] hover:bg-[#FA8B46]/90 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-6 py-3 bg-[#FA8B46] text-white hover:bg-[#FA8B46]/90 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading
                     ? "Saving..."

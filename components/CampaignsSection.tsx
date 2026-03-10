@@ -62,7 +62,7 @@ const CampaignsSection = () => {
 
   if (loading) {
     return (
-      <section className="py-16 md:py-20 bg-gradient-to-b from-background to-[#FFF5EE]">
+      <section className="py-16 md:py-20 bg-linear-to-b from-background to-[#FFF5EE]">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="inline-block w-8 h-8 border-4 border-[#FA8B46] border-t-transparent rounded-full animate-spin"></div>
@@ -79,7 +79,7 @@ const CampaignsSection = () => {
   return (
     <section
       ref={ref}
-      className="py-16 md:py-20 bg-gradient-to-b from-background to-[#FFF5EE] relative overflow-hidden"
+      className="py-16 md:py-20 bg-linear-to-b from-background to-[#FFF5EE] relative overflow-hidden"
       id="campaigns"
     >
       {/* Decorative background */}
@@ -118,12 +118,12 @@ const CampaignsSection = () => {
               className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100 flex flex-col"
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden flex-shrink-0">
+              <div className="relative bg-[#FEFBF2] h-56 overflow-hidden shrink-0">
                 <Image
                   src={campaign.image || "/logo.jpg"}
                   alt={campaign.title}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-contain group-hover:scale-110 transition-transform duration-500"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute top-4 left-4">
@@ -137,11 +137,11 @@ const CampaignsSection = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="font-display font-bold text-xl mb-3 text-foreground line-clamp-2 group-hover:text-[#FA8B46] transition-colors min-h-[3.5rem]">
+              <div className="p-6 flex flex-col grow">
+                <h3 className="font-display font-bold text-xl mb-3 text-foreground line-clamp-2 group-hover:text-[#FA8B46] transition-colors min-h-14">
                   {campaign.title}
                 </h3>
-                <p className="font-body text-muted-foreground text-sm mb-5 line-clamp-3 min-h-[4rem]">
+                <p className="font-body text-muted-foreground text-sm mb-5 line-clamp-3 min-h-16">
                   {campaign.description}
                 </p>
 
@@ -174,7 +174,7 @@ const CampaignsSection = () => {
                           : {}
                       }
                       transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
-                      className="bg-gradient-to-r from-[#FA8B46] to-[#ff9d5c] h-full rounded-full"
+                      className="bg-linear-to-r from-[#FA8B46] to-[#ff9d5c] h-full rounded-full"
                     />
                   </div>
 

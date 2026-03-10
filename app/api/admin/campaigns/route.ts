@@ -4,19 +4,24 @@ import { requireAdmin } from "@/lib/requireAdminAppRouter";
 import { v2 as cloudinary } from "cloudinary";
 import { prisma } from "@/db/prisma";
 
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// // Configure Cloudinary
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
 
 const createCampaignSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().min(10, "Description must be at least 10 characters"),
   goal: z.number().min(1, "Goal must be at least ₹1"),
   category: z.string(),
-  image: z.string().url("Invalid image URL"),
+  image: z
+    .string()
+    .url("Invalid image URL")
+    .optional()
+    .or(z.literal(""))
+    .nullable(),
   endDate: z.string().optional(),
 });
 
@@ -45,7 +50,7 @@ export async function POST(request: NextRequest) {
         description: validatedData.description,
         goal: goalInPaise,
         category: validatedData.category,
-        image: validatedData.image,
+        image: validatedData.image as string,
         endDate: validatedData.endDate ? new Date(validatedData.endDate) : null,
       },
     });
@@ -103,6 +108,10 @@ export async function PUT(request: NextRequest) {
       where: { id },
       data: {
         ...updateData,
+        image:
+          updateData.image && updateData.image.trim() !== ""
+            ? updateData.image
+            : null,
         goal: updateData.goal ? Math.round(updateData.goal * 100) : undefined,
         endDate: updateData.endDate ? new Date(updateData.endDate) : undefined,
       },
