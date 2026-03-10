@@ -212,7 +212,7 @@ export default function AdminCampaignsPage() {
           >
             <div className="relative h-48">
               <img
-                src={campaign.image}
+                src={campaign.image || "/logo.jpg"}
                 alt={campaign.title}
                 className="w-full h-full object-cover"
               />

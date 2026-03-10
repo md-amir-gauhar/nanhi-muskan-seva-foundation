@@ -317,7 +317,7 @@ const DonatePageContent = () => {
               >
                 <div className="relative h-64">
                   <Image
-                    src={campaign.image}
+                    src={campaign.image || "/logo.jpg"}
                     alt={campaign.title}
                     fill
                     className="object-cover"

@@ -76,7 +76,7 @@ model Campaign {
   description String    @db.Text
   goal        Int // Target amount in paise
   raised      Int       @default(0) // Current amount raised in paise
-  image       String
+  image       String?
   category    String
   status      String    @default("active") // active, completed, paused
   startDate   DateTime  @default(now())

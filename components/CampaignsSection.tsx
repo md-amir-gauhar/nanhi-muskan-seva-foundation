@@ -120,7 +120,7 @@ const CampaignsSection = () => {
               {/* Image */}
               <div className="relative h-56 overflow-hidden flex-shrink-0">
                 <Image
-                  src={campaign.image}
+                  src={campaign.image || "/logo.jpg"}
                   alt={campaign.title}
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
