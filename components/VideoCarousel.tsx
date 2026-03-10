@@ -7,8 +7,8 @@ import { useState, useRef, useEffect } from "react";
 const videos = [
   {
     id: 1,
-    title: "Community Support",
-    description: "Empowering communities through grassroots action",
+    title: "Environmental Action",
+    description: "Caring for our planet and animals",
     videoUrl: "/vids/1771482153720582.mp4",
   },
   {
@@ -25,14 +25,14 @@ const videos = [
   },
   {
     id: 4,
-    title: "Health & Well-being",
-    description: "Supporting health initiatives in communities",
+    title: "Environmental Action",
+    description: "Caring for our planet and animals",
     videoUrl: "/vids/IMG_1325.MOV",
   },
   {
     id: 5,
-    title: "Education Support",
-    description: "Building awareness and knowledge",
+    title: "Health & Well-being",
+    description: "Supporting health initiatives in communities",
     videoUrl: "/vids/IMG_1480.MOV",
   },
   {
@@ -43,8 +43,8 @@ const videos = [
   },
   {
     id: 7,
-    title: "Environmental Action",
-    description: "Caring for our planet and animals",
+    title: "Community Support",
+    description: "Empowering communities through grassroots action",
     videoUrl: "/vids/IMG_1744.MOV",
   },
 ];
