@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   FileText,
   DollarSign,
+  MessageSquare,
   LogOut,
   Menu,
   X,
@@ -51,6 +52,11 @@ export default function AdminLayout({
       name: "Donations",
       href: "/admin/donations",
       icon: DollarSign,
+    },
+    {
+      name: "Contacts",
+      href: "/admin/contacts",
+      icon: MessageSquare,
     },
   ];
 
